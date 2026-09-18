@@ -73,7 +73,6 @@ The app expects the following environment variables to connect to the API and co
 - `NEXT_PUBLIC_IMAGE_DOMAIN` — API image hostname for `next/image`
 - `NEXT_PUBLIC_ADMIN_EMAIL` — admin email displayed in the sidebar
 - `NEXT_PUBLIC_FRONTEND_BASE_URL` — storefront base URL
-- `NEXT_PUBLIC_IS_GROWFORE` — agency-branding toggle
 
 ## Scripts
 
@@ -90,4 +89,4 @@ The app expects the following environment variables to connect to the API and co
 
 ## License
 
-This repository is private and intended for internal store management. Powered by [Growfore Solution](https://growfore.com/).
+Copyright (c) 2026 Tej Kshetri. Licensed under the [MIT License](LICENSE).
