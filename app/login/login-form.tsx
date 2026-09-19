@@ -33,7 +33,7 @@ export function LoginForm({
     try {
       setIsLoading(true);
       const res = await fetch(
-        `/api/admin/login`,
+        `/api/platform/login`,
         {
           method: "POST",
           credentials: "include",
@@ -48,13 +48,19 @@ export function LoginForm({
       if (res.ok) {
         toast.success("Login successful");
         sessionStorage.setItem("tab_session_active", "true");
-        if (payload.token) {
+        const data = payload.data;
+        if (data?.token) {
           try {
-            localStorage.setItem("admin_token", payload.token);
-          } catch (e: any) {
-            throw new Error("Error: ", e);
+            localStorage.setItem("admin_token", data.token);
+          } catch {
+            throw new Error("Could not save login session");
           }
         }
+        await fetch("/api/store-selection", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ storeId: data?.stores?.[0]?.id }),
+        });
         router.push("/dashboard");
       } else {
         const msg = payload?.message || "Login failed";
@@ -115,6 +121,9 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
+          <p className="mt-4 text-center text-sm text-muted-foreground">
+            New here? <Link href="/signup" className="text-foreground underline">Create your store</Link>
+          </p>
         </CardContent>
       </Card>
     </div>

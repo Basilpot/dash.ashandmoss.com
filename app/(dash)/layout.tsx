@@ -37,29 +37,20 @@ const AdminDashboardLayout = async ({
 
   const me = await meRes.json();
   const admin = me?.data?.admin;
-  const currentStore = me?.data?.store;
   if (!admin) {
     redirect("/login");
   }
 
   let companyName: string | null = null;
-  let stores = [];
   try {
     const tenantHeaders = {
       Cookie: cookieStore.toString(),
       ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss" }),
     };
-    const [configRes, storesRes] = await Promise.all([
-      fetch(`${apiBase}/site-config`, { headers: tenantHeaders, cache: "no-store" }),
-      fetch(`${apiBase}/admin/stores`, { headers: tenantHeaders, cache: "no-store" }),
-    ]);
+    const configRes = await fetch(`${apiBase}/site-config`, { headers: tenantHeaders, cache: "no-store" });
     if (configRes.ok) {
       const config = await configRes.json();
       companyName = config?.data?.name ?? null;
-    }
-    if (storesRes.ok) {
-      const payload = await storesRes.json();
-      stores = payload?.data?.stores ?? [];
     }
   } catch {
     // non-fatal — sidebar falls back to the placeholder name
@@ -77,8 +68,6 @@ const AdminDashboardLayout = async ({
     >
       <AppSidebar
         user={{ name: admin.username, email: admin.email }}
-        stores={stores}
-        currentStoreId={currentStore?.id ?? storeId ?? ""}
       />
       <SidebarInset className="min-h-screen flex flex-col">
         <SiteHeader />

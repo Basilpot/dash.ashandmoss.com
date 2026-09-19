@@ -10,16 +10,13 @@ import {
   LucideGaugeCircle,
   LucideImage,
   LucideLayers,
-  LucideMail,
   LucideNewspaper,
-  LucideNotebookPen,
   LucidePackage,
   LucideReceipt,
   LucideRedo2,
   LucideStars,
   LucideTag,
   LucideBoxes,
-  LucideBuilding2,
   LucideWallet,
   type LucideIcon,
 } from "lucide-react"
@@ -36,7 +33,6 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { useSidebarStore } from "@/store/use-sidebar-store"
-import { StoreSwitcher, type StoreOption } from "@/components/store-switcher"
 
 const SIDEBAR_MENU_API = `/api/sidebar-menu`
 
@@ -70,7 +66,6 @@ export const navGroups: {
 
 const QUICK_ACTIONS = [
   { title: "Dashboard", url: "/dashboard", icon: LucideGaugeCircle },
-  { title: "Stores", url: "/stores", icon: LucideBuilding2 },
   { title: "Products", url: "/products", icon: LucidePackage },
   { title: "Categories", url: "/categories", icon: LucideFolder },
   { title: "Brands", url: "/brands", icon: LucideBadgeCheck },
@@ -88,13 +83,9 @@ const SECONDARY_NAV: {
 
 export function AppSidebar({
   user,
-  stores,
-  currentStoreId,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
   user?: { name: string; email: string }
-  stores: StoreOption[]
-  currentStoreId: string
 }) {
   const hidden = useSidebarStore((s) => s.hidden)
   const setHidden = useSidebarStore((s) => s.setHidden)
@@ -123,11 +114,7 @@ export function AppSidebar({
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <StoreSwitcher stores={stores} currentStoreId={currentStoreId} />
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarMenu><SidebarMenuItem className="px-2 py-1 font-semibold">Store dashboard</SidebarMenuItem></SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} />
