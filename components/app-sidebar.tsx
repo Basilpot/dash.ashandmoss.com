@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import Link from "next/link"
 import {
   LucideBadgeCheck,
   LucideColumnsSettings,
@@ -18,9 +17,9 @@ import {
   LucideReceipt,
   LucideRedo2,
   LucideStars,
-  LucideStore,
   LucideTag,
   LucideBoxes,
+  LucideBuilding2,
   LucideWallet,
   type LucideIcon,
 } from "lucide-react"
@@ -34,10 +33,10 @@ import {
   SidebarFooter,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { useSidebarStore } from "@/store/use-sidebar-store"
+import { StoreSwitcher, type StoreOption } from "@/components/store-switcher"
 
 const SIDEBAR_MENU_API = `/api/sidebar-menu`
 
@@ -71,6 +70,7 @@ export const navGroups: {
 
 const QUICK_ACTIONS = [
   { title: "Dashboard", url: "/dashboard", icon: LucideGaugeCircle },
+  { title: "Stores", url: "/stores", icon: LucideBuilding2 },
   { title: "Products", url: "/products", icon: LucidePackage },
   { title: "Categories", url: "/categories", icon: LucideFolder },
   { title: "Brands", url: "/brands", icon: LucideBadgeCheck },
@@ -87,12 +87,14 @@ const SECONDARY_NAV: {
 }[] = []
 
 export function AppSidebar({
-  companyName,
   user,
+  stores,
+  currentStoreId,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
-  companyName?: string
   user?: { name: string; email: string }
+  stores: StoreOption[]
+  currentStoreId: string
 }) {
   const hidden = useSidebarStore((s) => s.hidden)
   const setHidden = useSidebarStore((s) => s.setHidden)
@@ -123,18 +125,7 @@ export function AppSidebar({
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard">
-                <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-                  <LucideStore className="size-4" />
-                </div>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">
-                    {companyName ?? "Tasche"}
-                  </span>
-                </div>
-              </Link>
-            </SidebarMenuButton>
+            <StoreSwitcher stores={stores} currentStoreId={currentStoreId} />
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>

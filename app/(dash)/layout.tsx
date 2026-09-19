@@ -15,6 +15,7 @@ const AdminDashboardLayout = async ({
   const cookieStore = await cookies();
 
   const authToken = cookieStore.get("admin_auth_token")?.value;
+  const storeId = cookieStore.get("store_id")?.value;
 
   if (!authToken) {
     redirect("/login");
@@ -23,7 +24,10 @@ const AdminDashboardLayout = async ({
   const apiBase =
     process.env.API_BASE_URL ?? "http://localhost:3000/api/v1";
   const meRes = await fetch(`${apiBase}/admin/me`, {
-    headers: { Cookie: cookieStore.toString() },
+    headers: {
+      Cookie: cookieStore.toString(),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss" }),
+    },
     cache: "no-store",
   });
 
@@ -33,19 +37,29 @@ const AdminDashboardLayout = async ({
 
   const me = await meRes.json();
   const admin = me?.data?.admin;
+  const currentStore = me?.data?.store;
   if (!admin) {
     redirect("/login");
   }
 
   let companyName: string | null = null;
+  let stores = [];
   try {
-    const configRes = await fetch(`${apiBase}/site-config`, {
-      headers: { Cookie: cookieStore.toString() },
-      cache: "no-store",
-    });
+    const tenantHeaders = {
+      Cookie: cookieStore.toString(),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss" }),
+    };
+    const [configRes, storesRes] = await Promise.all([
+      fetch(`${apiBase}/site-config`, { headers: tenantHeaders, cache: "no-store" }),
+      fetch(`${apiBase}/admin/stores`, { headers: tenantHeaders, cache: "no-store" }),
+    ]);
     if (configRes.ok) {
       const config = await configRes.json();
       companyName = config?.data?.name ?? null;
+    }
+    if (storesRes.ok) {
+      const payload = await storesRes.json();
+      stores = payload?.data?.stores ?? [];
     }
   } catch {
     // non-fatal — sidebar falls back to the placeholder name
@@ -62,8 +76,9 @@ const AdminDashboardLayout = async ({
       }
     >
       <AppSidebar
-        companyName={companyName ?? FALLBACK_NAME}
         user={{ name: admin.username, email: admin.email }}
+        stores={stores}
+        currentStoreId={currentStore?.id ?? storeId ?? ""}
       />
       <SidebarInset className="min-h-screen flex flex-col">
         <SiteHeader />
