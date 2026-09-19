@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -31,6 +32,9 @@ type TagForm = {
   name: string;
   slug: string;
   description?: string;
+  sortOrder: number;
+  isFeatured: boolean;
+  isFeaturedInNav: boolean;
 };
 
 export default function Tags() {
@@ -48,11 +52,14 @@ export default function Tags() {
   const [currentTagSlug, setCurrentTagSlug] = useState<string | null>(null);
   const [currentTagId, setCurrentTagId] = useState<string | null>(null);
 
-  const { register, handleSubmit, reset, control, setValue } = useForm<TagForm>({
+  const { register, handleSubmit, reset, control, setValue, watch } = useForm<TagForm>({
     defaultValues: {
       name: "",
       slug: "",
       description: "",
+      sortOrder: 0,
+      isFeatured: false,
+      isFeaturedInNav: false,
     },
   });
 
@@ -86,7 +93,7 @@ export default function Tags() {
     setIsEdit(false);
     setCurrentTagSlug(null);
     setCurrentTagId(null);
-    reset({ name: "", slug: "", description: "" });
+    reset({ name: "", slug: "", description: "", sortOrder: 0, isFeatured: false, isFeaturedInNav: false });
     setIsDialogOpen(true);
   };
 
@@ -98,6 +105,9 @@ export default function Tags() {
       name: tag.name,
       slug: tag.slug,
       description: tag.description ?? "",
+      sortOrder: tag.sortOrder ?? 0,
+      isFeatured: tag.isFeatured ?? false,
+      isFeaturedInNav: tag.isFeaturedInNav ?? false,
     });
     setIsDialogOpen(true);
   };
@@ -267,6 +277,9 @@ export default function Tags() {
                 placeholder="Add a description for this tag/section."
               />
             </div>
+            <div className="space-y-2"><Label htmlFor="tagSortOrder">Sort order</Label><Input id="tagSortOrder" type="number" {...register("sortOrder", { valueAsNumber: true })} /></div>
+            <div className="flex items-center gap-2"><Checkbox id="tagFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="tagFeatured">Featured on storefront</Label></div>
+            <div className="flex items-center gap-2"><Checkbox id="tagNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="tagNav">Promote to top-level navigation</Label></div>
 
             <DialogFooter>
               <Button type="submit" size="lg">

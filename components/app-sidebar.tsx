@@ -18,6 +18,7 @@ import {
   LucideTag,
   LucideBoxes,
   LucideWallet,
+  LucidePanelsTopLeft,
   type LucideIcon,
 } from "lucide-react"
 
@@ -66,6 +67,7 @@ export const navGroups: {
 
 const QUICK_ACTIONS = [
   { title: "Dashboard", url: "/dashboard", icon: LucideGaugeCircle },
+  { title: "Homepage", url: "/settings/homepage", icon: LucidePanelsTopLeft },
   { title: "Products", url: "/products", icon: LucidePackage },
   { title: "Categories", url: "/categories", icon: LucideFolder },
   { title: "Brands", url: "/brands", icon: LucideBadgeCheck },

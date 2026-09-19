@@ -49,11 +49,13 @@ interface MenuItem {
   label: string;
   url: string;
   children: MenuItem[];
+  isFeaturedInNav?: boolean;
 }
 
 interface MenuFormData {
   label: string;
   url: string;
+  isFeaturedInNav?: boolean;
 }
 
 interface SortableMenuItemProps {
@@ -655,7 +657,7 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
 
   const handleEdit = (item: MenuItem) => {
     setEditingId(item.id);
-    setEditingItem({ label: item.label, url: item.url });
+    setEditingItem({ label: item.label, url: item.url, isFeaturedInNav: item.isFeaturedInNav });
   };
 
   const handleSaveEdit = async (id: string) => {
@@ -811,6 +813,7 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
                 }
                 placeholder="Label"
               />
+              <label className="flex items-center gap-2 text-sm"><Switch checked={editingItem.isFeaturedInNav ?? false} onCheckedChange={(value) => setEditingItem({ ...editingItem, isFeaturedInNav: value })} />Promote to top-level navigation</label>
               <Input
                 type="text"
                 value={editingItem.url}
@@ -987,6 +990,7 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
                         setNewItem({ ...newItem, label: e.target.value })
                       }
                     />
+                    <label className="flex shrink-0 items-center gap-2 text-sm"><Switch checked={newItem.isFeaturedInNav ?? false} onCheckedChange={(value) => setNewItem({ ...newItem, isFeaturedInNav: value })} />Featured</label>
                     <Input
                       placeholder="URL"
                       value={newItem.url}

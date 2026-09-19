@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -31,6 +32,8 @@ type CategoryForm = {
   slug: string;
   sortOrder: number;
   parentId: string;
+  isFeatured: boolean;
+  isFeaturedInNav: boolean;
 };
 
 type CategoryNode = {
@@ -40,6 +43,8 @@ type CategoryNode = {
   image?: string | null;
   sortOrder: number;
   parentId?: string | null;
+  isFeatured: boolean;
+  isFeaturedInNav: boolean;
   _count?: { products: number };
   children?: CategoryNode[];
 };
@@ -64,8 +69,8 @@ export default function Categories() {
   const [isEdit, setIsEdit] = useState(false);
   const [currentCatId, setCurrentCatId] = useState<string | null>(null);
 
-  const { register, handleSubmit, reset, control, setValue } = useForm<CategoryForm>({
-    defaultValues: { name: "", slug: "", sortOrder: 0, parentId: "" },
+  const { register, handleSubmit, reset, control, setValue, watch } = useForm<CategoryForm>({
+    defaultValues: { name: "", slug: "", sortOrder: 0, parentId: "", isFeatured: false, isFeaturedInNav: false },
   });
   useSlugAutoFill(control, setValue, "name", "slug");
   const [categoryImage, setCategoryImage] = useState<{ url: string; mediaId?: string }>({ url: "" });
@@ -105,7 +110,7 @@ export default function Categories() {
   const openCreateDialog = () => {
     setIsEdit(false);
     setCurrentCatId(null);
-    reset({ name: "", slug: "", sortOrder: 0, parentId: "" });
+    reset({ name: "", slug: "", sortOrder: 0, parentId: "", isFeatured: false, isFeaturedInNav: false });
     setCategoryImage({ url: "" });
     setIsDialogOpen(true);
   };
@@ -118,6 +123,8 @@ export default function Categories() {
       slug: category.slug,
       sortOrder: category.sortOrder ?? 0,
       parentId: category.parentId ?? "",
+      isFeatured: category.isFeatured,
+      isFeaturedInNav: category.isFeaturedInNav,
     });
     setCategoryImage({ url: category.image ?? "" });
     setIsDialogOpen(true);
@@ -132,6 +139,8 @@ export default function Categories() {
       slug: data.slug,
       sortOrder: Number(data.sortOrder ?? 0),
       parentId: data.parentId || null,
+      isFeatured: data.isFeatured,
+      isFeaturedInNav: data.isFeaturedInNav,
     };
     if (categoryImage.url) payload.image = categoryImage.url;
 
@@ -296,6 +305,8 @@ export default function Categories() {
               <Label htmlFor="sortOrder">Sort Order</Label>
               <Input {...register("sortOrder", { setValueAs: (v) => Number(v) })} type="number" />
             </div>
+            <div className="flex items-center gap-2"><Checkbox id="categoryFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="categoryFeatured">Featured on storefront</Label></div>
+            <div className="flex items-center gap-2"><Checkbox id="categoryNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="categoryNav">Promote to top-level navigation</Label></div>
             <div className="space-y-2">
               <Label>Category Image</Label>
               <ImageUpload

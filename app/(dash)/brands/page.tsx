@@ -32,6 +32,7 @@ type BrandForm = {
   slug: string;
   sortOrder: number;
   isFeatured: boolean;
+  isFeaturedInNav: boolean;
 };
 
 export default function Brands() {
@@ -45,7 +46,7 @@ export default function Brands() {
   const [currentBrandId, setCurrentBrandId] = useState<string | null>(null);
 
   const { register, handleSubmit, reset, control, setValue, watch } = useForm<BrandForm>({
-    defaultValues: { name: "", slug: "", sortOrder: 0, isFeatured: false },
+    defaultValues: { name: "", slug: "", sortOrder: 0, isFeatured: false, isFeaturedInNav: false },
   });
   useSlugAutoFill(control, setValue, "name", "slug");
   const [brandLogo, setBrandLogo] = useState<{ url: string; mediaId?: string }>({ url: "" });
@@ -74,7 +75,7 @@ export default function Brands() {
   const openCreateDialog = () => {
     setIsEdit(false);
     setCurrentBrandId(null);
-    reset({ name: "", slug: "", sortOrder: 0, isFeatured: false });
+    reset({ name: "", slug: "", sortOrder: 0, isFeatured: false, isFeaturedInNav: false });
     setBrandLogo({ url: "" });
     setIsDialogOpen(true);
   };
@@ -87,6 +88,7 @@ export default function Brands() {
       slug: brand.slug,
       sortOrder: brand.sortOrder ?? 0,
       isFeatured: brand.isFeatured ?? false,
+      isFeaturedInNav: brand.isFeaturedInNav ?? false,
     });
     setBrandLogo({ url: brand.logo ?? "" });
     setIsDialogOpen(true);
@@ -101,6 +103,7 @@ export default function Brands() {
       slug: data.slug,
       sortOrder: Number(data.sortOrder ?? 0),
       isFeatured: data.isFeatured ?? false,
+      isFeaturedInNav: data.isFeaturedInNav ?? false,
     };
     if (brandLogo.url) payload.logo = brandLogo.url;
 
@@ -255,6 +258,7 @@ export default function Brands() {
               />
               <Label htmlFor="isFeatured">Featured brand</Label>
             </div>
+            <div className="flex items-center space-x-2"><Checkbox checked={watch("isFeaturedInNav") ?? false} onCheckedChange={(v) => setValue("isFeaturedInNav", v === true)} id="brandNav" /><Label htmlFor="brandNav">Promote to top-level navigation</Label></div>
             <div className="space-y-2">
               <Label>Brand Logo</Label>
               <ImageUpload
