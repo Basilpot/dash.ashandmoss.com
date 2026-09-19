@@ -44,6 +44,7 @@ export type SiteConfig = {
   fonts: { primary: string; secondary: string };
   notice: { message: string; linkLabel: string; linkUrl: string; visible: boolean; dismissible: boolean };
   heroes: { id: string; image: string; title: string; text: string; linkLabel: string; linkUrl: string; visible: boolean }[];
+  benefitsTitle: string;
   benefits: { id: string; title: string; description: string; icon: string; visible: boolean }[];
   about: { eyebrow: string; title: string; body: string; image: string; linkLabel: string; linkUrl: string; visible: boolean };
 };
@@ -103,6 +104,7 @@ function toForm(c: any): SiteConfig {
     },
     notice: { message: c.notice?.message ?? "", linkLabel: c.notice?.linkLabel ?? "", linkUrl: c.notice?.linkUrl ?? "", visible: c.notice?.visible ?? false, dismissible: c.notice?.dismissible ?? false },
     heroes: Array.isArray(c.heroes) ? c.heroes : [],
+    benefitsTitle: c.benefitsTitle ?? "",
     benefits: Array.isArray(c.benefits) ? c.benefits : [],
     about: { eyebrow: c.about?.eyebrow ?? "", title: c.about?.title ?? "", body: c.about?.body ?? "", image: c.about?.image ?? "", linkLabel: c.about?.linkLabel ?? "", linkUrl: c.about?.linkUrl ?? "", visible: c.about?.visible ?? false },
   };
