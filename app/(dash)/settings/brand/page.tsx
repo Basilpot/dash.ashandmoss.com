@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { MediaPicker } from "@/components/media-picker";
+import { Input } from "@repo/ui";
+import { Textarea } from "@repo/ui";
+import { MediaPicker } from "@repo/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+} from "@repo/ui";
+import { cn } from "@repo/ui";
 import { PALETTES } from "@/lib/theme/palettes";
 import { FONTS, DEFAULT_FONTS, getFont } from "@/lib/theme/fonts";
 import {
@@ -25,7 +25,7 @@ import {
   useSiteConfig,
   useUpload,
   type SiteConfig,
-} from "@/components/site-config-shared";
+} from "@repo/ui";
 
 const SLICE = [
   "name",

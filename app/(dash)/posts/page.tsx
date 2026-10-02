@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { DataTable, type TPagination } from "@/components/ui/data-table";
+import { Button } from "@repo/ui";
+import { DataTable, type TPagination } from "@repo/ui";
 import { Plus } from "lucide-react";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@repo/ui";
 import { blogsColumns } from "./columns";
 import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -16,7 +16,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@repo/ui";
 
 type BlogCategory = {
   id: string;

@@ -3,14 +3,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@repo/ui";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { DataTable } from "@/components/ui/data-table";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Textarea } from "@repo/ui";
+import { DataTable } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   Dialog,
@@ -19,7 +19,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 
 import {
   Edit3,
@@ -28,8 +28,8 @@ import {
 } from "lucide-react";
 
 import { TPagination } from "@/app/(dash)/types/pagination";
-import { ImageUpload } from "@/components/image-upload";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { ImageUpload } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 
 type Testimonial = {
   id: string;

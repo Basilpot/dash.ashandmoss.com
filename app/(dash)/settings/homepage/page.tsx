@@ -2,12 +2,12 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import { Checkbox } from "@/components/ui/checkbox";
-import { ImageUpload } from "@/components/image-upload";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Field, FormSkeleton, RemoveBtn, SaveBar, Section, SettingsHeader, useSiteConfig, type SiteConfig } from "@/components/site-config-shared";
+import { ImageUpload } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Textarea } from "@repo/ui";
+import { Field, FormSkeleton, RemoveBtn, SaveBar, Section, SettingsHeader, useSiteConfig, type SiteConfig } from "@repo/ui";
 
 type Content = Pick<SiteConfig, "notice" | "heroes" | "benefitsTitle" | "benefits" | "about">;
 

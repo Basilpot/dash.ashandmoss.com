@@ -1,25 +1,25 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { PageHeader } from "@/components/page-header";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { PageHeader } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Textarea } from "@repo/ui";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@repo/ui";
 import { toast } from "sonner";
 import {
   Upload,
@@ -32,11 +32,11 @@ import {
   Link as LinkIcon,
   Crop,
 } from "lucide-react";
-import { listMedia, updateMedia, deleteMedia, uploadMedia, type MediaItem, type Pagination } from "@/lib/media";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
-import { GalleryImage } from "@/components/gallery-image";
-import { AddMediaUrlDialog } from "@/components/add-media-url-dialog";
-import { CropDialog } from "@/components/crop-dialog";
+import { listMedia, updateMedia, deleteMedia, uploadMedia, type MediaItem, type Pagination } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
+import { GalleryImage } from "@repo/ui";
+import { AddMediaUrlDialog } from "@repo/ui";
+import { CropDialog } from "@repo/ui";
 
 export default function MediaLibraryPage() {
   const [media, setMedia] = useState<MediaItem[]>([]);

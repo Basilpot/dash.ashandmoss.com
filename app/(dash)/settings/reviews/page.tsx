@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@repo/ui";
 import {
   Field,
   FormSkeleton,
@@ -10,7 +10,7 @@ import {
   SettingsHeader,
   useSiteConfig,
   type SiteConfig,
-} from "@/components/site-config-shared";
+} from "@repo/ui";
 
 type ReviewRow = { count: number; rating: number; link: string };
 

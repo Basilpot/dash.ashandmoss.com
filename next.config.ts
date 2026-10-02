@@ -1,17 +1,15 @@
+import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  async rewrites() {
-    const apiBase =
-      process.env.API_BASE_URL ?? "http://localhost:3000/api/v1";
-    return [
-      {
-        source: "/api/:path*",
-        destination: `${apiBase}/:path*`,
-      },
-    ];
+  // @repo/ui ships raw TSX; without this Next treats it as an external package
+  // and fails to compile it.
+  transpilePackages: ["@repo/ui"],
+  turbopack: {
+    // OpenNext sets outputFileTracingRoot to the app dir during its build and
+    // Next rejects the build unless turbopack.root matches it exactly.
+    root: import.meta.dirname,
   },
-
   images: {
     remotePatterns: [
       {

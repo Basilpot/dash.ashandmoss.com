@@ -3,10 +3,10 @@
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import Link from "next/link";
-import { MediaPicker } from "@/components/media-picker";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { MediaPicker } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 
 type FormValues = {
   username: string;

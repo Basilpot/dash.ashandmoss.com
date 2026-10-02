@@ -2,15 +2,15 @@
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { PageHeader } from "@/components/page-header";
-import { DataTable } from "@/components/ui/data-table";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { PageHeader } from "@repo/ui";
+import { DataTable } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
 import {
   Badge,
-} from "@/components/ui/badge";
+} from "@repo/ui";
 import { ChevronRight, Minus, Package, Plus, RefreshCcw } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui";
 import { toast } from "sonner";
 import { ColumnDef } from "@tanstack/react-table";
 

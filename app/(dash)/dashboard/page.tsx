@@ -1,7 +1,7 @@
 "use client";
 import { StatCard } from "@/components/cards/stat-card";
-import { PageHeader } from "@/components/page-header";
-import { Skeleton } from "@/components/ui/skeleton";
+import { PageHeader } from "@repo/ui";
+import { Skeleton } from "@repo/ui";
 import {
   LucidePackage,
   LucideCheckCircle2,

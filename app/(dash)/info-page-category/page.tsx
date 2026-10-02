@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "next/navigation";
-import { DataTable, type TPagination } from "@/components/ui/data-table";
-import { PageHeader } from "@/components/page-header";
+import { DataTable, type TPagination } from "@repo/ui";
+import { PageHeader } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "@repo/ui";
+import { Button } from "@repo/ui";
 import {
   Dialog,
   DialogContent,
@@ -14,16 +14,16 @@ import {
   DialogTitle,
   DialogFooter,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+} from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
 import {
   Plus,
   Edit3,
   Trash2Icon,
 } from "lucide-react";
 import { toast } from "sonner";
-import { generateSlug } from "@/lib/generateSlug";
+import { generateSlug } from "@repo/ui";
 
 interface InfoPageCategory {
   id: string;

@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,16 +20,16 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@repo/ui";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { Badge } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@/components/ui/tooltip";
+} from "@repo/ui";
 
 type BlogCategory = {
   id: string;

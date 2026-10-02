@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
 import {
   Field,
   FormSkeleton,
@@ -13,7 +13,7 @@ import {
   SettingsHeader,
   useSiteConfig,
   type SiteConfig,
-} from "@/components/site-config-shared";
+} from "@repo/ui";
 import { FieldDescription, FieldTitle } from "@/components/ui/field";
 
 const DEFAULT_ADDRESS = {

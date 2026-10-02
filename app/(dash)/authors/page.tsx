@@ -2,18 +2,18 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@repo/ui";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Edit3, LucidePlus, Plus, Trash2Icon, X } from "lucide-react";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Textarea } from "@repo/ui";
 import {
   Dialog,
   DialogContent,
@@ -21,11 +21,11 @@ import {
   DialogHeader,
   DialogFooter,
   DialogDescription,
-} from "@/components/ui/dialog";
-import { DataTable } from "@/components/ui/data-table";
+} from "@repo/ui";
+import { DataTable } from "@repo/ui";
 import { TPagination } from "@/app/(dash)/types/pagination";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
-import { MediaPicker } from "@/components/media-picker";
+import { getFullImageUrl } from "@repo/ui";
+import { MediaPicker } from "@repo/ui";
 
 type Author = {
   id: string;

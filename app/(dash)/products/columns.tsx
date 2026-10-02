@@ -1,8 +1,8 @@
 "use client";
 
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Badge } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { cn } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatStatus } from "@/components/atoms/status-badge";
 import {
@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@repo/ui";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -37,7 +37,7 @@ import {
 import { Suspense, useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { getFullImageUrl } from "@repo/ui";
 import Link from "next/link";
 
 export function createColumns(

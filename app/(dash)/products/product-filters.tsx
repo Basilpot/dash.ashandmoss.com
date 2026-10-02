@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@repo/ui";
 import { SlidersHorizontal } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui";
 
 export const STATUS_TABS = ["all", "draft", "published"] as const;
 export const STATUS_PARAM: Record<(typeof STATUS_TABS)[number], string> = {

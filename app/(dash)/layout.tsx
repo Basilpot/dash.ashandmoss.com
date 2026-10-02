@@ -1,11 +1,11 @@
 import { cookies } from "next/headers";
 import { AppSidebar } from "@/components/app-sidebar";
-import { SiteHeader } from "@/components/sidebar/site-header";
-import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
+import { SiteHeader } from "@repo/ui";
+import { SidebarProvider, SidebarInset } from "@repo/ui";
 import { Toaster } from "sonner";
 import { redirect } from "next/navigation";
 
-const FALLBACK_NAME = "Tasche";
+const FALLBACK_NAME = "Store";
 
 const AdminDashboardLayout = async ({
   children,
@@ -26,7 +26,7 @@ const AdminDashboardLayout = async ({
   const meRes = await fetch(`${apiBase}/admin/me`, {
     headers: {
       Cookie: cookieStore.toString(),
-      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss" }),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ashandmoss" }),
     },
     cache: "no-store",
   });
@@ -45,7 +45,7 @@ const AdminDashboardLayout = async ({
   try {
     const tenantHeaders = {
       Cookie: cookieStore.toString(),
-      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss" }),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ashandmoss" }),
     };
     const configRes = await fetch(`${apiBase}/site-config`, { headers: tenantHeaders, cache: "no-store" });
     if (configRes.ok) {

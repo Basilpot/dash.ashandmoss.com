@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { PageHeader } from "@/components/page-header";
-import { DataTable } from "@/components/ui/data-table";
+import { PageHeader } from "@repo/ui";
+import { DataTable } from "@repo/ui";
 import { PlusIcon } from "lucide-react";
 import { createColumns } from "./columns";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import Link from "next/link";
 import { ProductFilters, STATUS_PARAM, STATUS_TABS } from "./product-filters";
 

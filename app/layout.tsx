@@ -4,7 +4,7 @@ import "./globals.css";
 import { interTight, livvic } from "@/lib/font";
 
 export const metadata: Metadata = {
-  title: "Tasche — Admin",
+  title: "Ash & Moss — Admin",
   icons: "/icon.svg",
 };
 

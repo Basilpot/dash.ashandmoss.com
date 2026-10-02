@@ -1,5 +1,5 @@
 import { compressIfNeeded } from "@/lib/imageCompressor";
-import { uploadMedia as uploadMediaApi } from "@/lib/media";
+import { uploadMedia as uploadMediaApi } from "@repo/ui";
 
 export const uploadImageToCloudflare = async (file: File) => {
   const compressed = await compressIfNeeded(file);

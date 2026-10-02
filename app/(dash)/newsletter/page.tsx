@@ -1,11 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { PageHeader } from "@/components/page-header";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { PageHeader } from "@repo/ui";
+import { Textarea } from "@repo/ui";
+import { Label } from "@repo/ui";
 import { toast } from "sonner";
 import { LucideMailPlus, LucideSend, LucideUserPlus, RefreshCw } from "lucide-react";
 import {
@@ -15,9 +15,9 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 
-import { DataTable } from "@/components/ui/data-table";
+import { DataTable } from "@repo/ui";
 import { createColumns, Subscriber } from "./columns";
 
 const API = "/api";

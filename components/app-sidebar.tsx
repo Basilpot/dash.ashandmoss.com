@@ -22,9 +22,9 @@ import {
   type LucideIcon,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
-import { NavUser } from "@/components/nav-user"
+import { NavMain } from "@repo/ui"
+import { NavSecondary } from "@repo/ui"
+import { NavUser } from "@repo/ui"
 import {
   Sidebar,
   SidebarContent,
@@ -32,8 +32,8 @@ import {
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
-import { useSidebarStore } from "@/store/use-sidebar-store"
+} from "@repo/ui"
+import { useSidebarStore } from "@repo/ui"
 
 const SIDEBAR_MENU_API = `/api/sidebar-menu`
 

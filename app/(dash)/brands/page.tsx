@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@repo/ui";
 import { useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   Dialog,
@@ -17,15 +17,15 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
 
-import { DataTable } from "@/components/ui/data-table";
-import { ImageUpload } from "@/components/image-upload";
-import { useSlugAutoFill } from "@/lib/useSlugAutoFill";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { DataTable } from "@repo/ui";
+import { ImageUpload } from "@repo/ui";
+import { useSlugAutoFill } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 
 type BrandForm = {
   name: string;

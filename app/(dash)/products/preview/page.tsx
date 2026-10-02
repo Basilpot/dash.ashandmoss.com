@@ -3,12 +3,12 @@
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { Badge } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 import { formatStatus } from "@/components/atoms/status-badge";
 import { ChevronLeft, Loader2 } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { cn } from "@repo/ui";
 
 function ProductPreviewContent() {
   const searchParams = useSearchParams();

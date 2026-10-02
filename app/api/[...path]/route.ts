@@ -12,7 +12,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
 
   const storeId = cookieStore.get("store_id")?.value;
   if (storeId) headers.set("X-Store-Id", storeId);
-  else headers.set("X-Store-Slug", process.env.DEFAULT_STORE_SLUG ?? "ash-and-moss");
+  else headers.set("X-Store-Slug", process.env.DEFAULT_STORE_SLUG ?? "ashandmoss");
 
   const url = new URL(`${API}/${path.join("/")}`);
   url.search = request.nextUrl.search;
@@ -24,9 +24,20 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
     duplex: "half",
   } as RequestInit & { duplex: "half" });
 
+  // Do not forward content-encoding/content-length. The upstream can advertise
+  // an encoding its body was not actually compressed with (wrangler dev does
+  // exactly this), and passing the header through alongside an already-decoded
+  // stream makes every browser request fail with ERR_CONTENT_DECODING_FAILED.
+  // Re-encoding is the runtime's job, not the proxy's.
+  const responseHeaders = new Headers();
+  response.headers.forEach((value, key) => {
+    if (key === "content-encoding" || key === "content-length") return;
+    responseHeaders.set(key, value);
+  });
+
   return new Response(response.body, {
     status: response.status,
-    headers: response.headers,
+    headers: responseHeaders,
   });
 }
 

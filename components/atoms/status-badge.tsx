@@ -22,4 +22,9 @@ export function formatStatus(stat: string) {
       color: "bg-red-500",
     };
   }
+  return {
+    text: stat,
+    icon: null,
+    color: "bg-muted-foreground",
+  };
 }

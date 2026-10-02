@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useMemo } from "react";
 import { useSearchParams } from "next/navigation";
-import { PageHeader } from "@/components/page-header";
-import { DataTable } from "@/components/ui/data-table";
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { PageHeader } from "@repo/ui";
+import { DataTable } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Input } from "@repo/ui";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@/components/ui/dialog";
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { toast } from "sonner";
 import { Edit3, Plus, Trash2Icon } from "lucide-react";

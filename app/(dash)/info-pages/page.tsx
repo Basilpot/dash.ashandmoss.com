@@ -1,9 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { DataTable, type TPagination } from "@/components/ui/data-table";
+import { Button } from "@repo/ui";
+import { DataTable, type TPagination } from "@repo/ui";
 import { Plus } from "lucide-react";
-import { PageHeader } from "@/components/page-header";
+import { PageHeader } from "@repo/ui";
 import { infoPagesColumns } from "./columns";
 import { useEffect, useState } from "react";
 import Link from "next/link";
@@ -15,8 +15,8 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { cn } from "@/lib/utils";
+} from "@repo/ui";
+import { cn } from "@repo/ui";
 
 type InfoPageCategory = {
   id: string;

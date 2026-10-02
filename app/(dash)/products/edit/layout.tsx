@@ -1,7 +1,7 @@
 "use client";
 
 import StepButton from "@/components/atoms/step-button";
-import { Button } from "@/components/ui/button";
+import { Button } from "@repo/ui";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useProductStore } from "@/store/useProductStore";
 import { useSearchParams } from "next/navigation";

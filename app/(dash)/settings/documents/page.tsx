@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { Plus } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
 import {
   FileUploadLabel,
   FormSkeleton,
@@ -14,7 +14,7 @@ import {
   useSiteConfig,
   useUpload,
   type SiteConfig,
-} from "@/components/site-config-shared";
+} from "@repo/ui";
 
 type DocumentRow = { title: string; key: string; path: string };
 

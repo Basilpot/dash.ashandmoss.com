@@ -17,15 +17,15 @@ import {
   MoveDown,
   MoveUp,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "@repo/ui";
 import { toast } from "sonner";
 import CodeEditor from "@uiw/react-textarea-code-editor";
-import { Switch } from "@/components/ui/switch";
-import { PageHeader } from "../page-header";
+import { Switch } from "@repo/ui";
+import { PageHeader } from "@repo/ui";
 import {
   DndContext,
   closestCenter,

@@ -5,12 +5,12 @@ import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { getFullImageUrl } from "@/lib/getFullImageUrl";
+import { Input } from "@repo/ui";
+import { Textarea } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Button } from "@repo/ui";
+import { cn } from "@repo/ui";
+import { getFullImageUrl } from "@repo/ui";
 import { useProductStore, FIELD_LABELS } from "@/store/useProductStore";
 import {
   GripVertical,
@@ -43,17 +43,17 @@ import { Combobox } from "@/components/organisms/combo-box";
 import { createProductSchema } from "@/lib/validationSchemas";
 import { ProductStatus } from "@/app/(dash)/enums/productStatus.enum";
 import { ProductFormData } from "@/app/(dash)/types/productFormData";
-import { InstructionTooltip } from "@/components/atoms/instruction-tooltip";
-import InfoCard from "@/components/atoms/info-card";
-import LabelDescription from "@/components/atoms/label-description";
-import ListBox from "@/components/atoms/list-box";
-import { MultiSelect } from "@/components/organisms/multi-select";
-import { TipTapField } from "@/components/posts/tiptap-field";
+import { InstructionTooltip } from "@repo/ui";
+import { InfoCard } from "@repo/ui";
+import { LabelDescription } from "@repo/ui";
+import { ListBox } from "@repo/ui";
+import { MultiSelect } from "@repo/ui";
+import { TipTapField } from "@repo/ui";
 import { Checkbox } from "@/components/ui/checkbox";
-import { generateSlug } from "@/lib/generateSlug";
-import { useSlugAutoFill } from "@/lib/useSlugAutoFill";
-import { MediaPicker } from "@/components/media-picker";
-import { useDraft } from "@/hooks/use-draft";
+import { generateSlug } from "@repo/ui";
+import { useSlugAutoFill } from "@repo/ui";
+import { MediaPicker } from "@repo/ui";
+import { useDraft } from "@repo/ui";
 
 const MAX_STEP = 8;
 

@@ -1,10 +1,10 @@
 "use client";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import { ImageUpload } from "@/components/image-upload";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Button } from "@repo/ui";
+import { ImageUpload } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
 import { ScanSearch } from "lucide-react";
 import { useCallback, useEffect, useState, Suspense } from "react";
 import { Controller, useForm } from "react-hook-form";
@@ -18,19 +18,19 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { TipTapField } from "@/components/posts/tiptap-field";
-import { generateSlug } from "@/lib/generateSlug";
-import { useSlugAutoFill } from "@/lib/useSlugAutoFill";
-import { useDraft } from "@/hooks/use-draft";
-import { resolveMediaHtml } from "@/lib/resolve-media-html";
+} from "@repo/ui";
+import { TipTapField } from "@repo/ui";
+import { generateSlug } from "@repo/ui";
+import { useSlugAutoFill } from "@repo/ui";
+import { useDraft } from "@repo/ui";
+import { resolveMediaHtml } from "@repo/ui";
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from "@/components/ui/sheet";
+} from "@repo/ui";
 
 type InfoPageCategory = {
   id: string;

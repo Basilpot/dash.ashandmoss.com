@@ -1,6 +1,6 @@
 {
-  // Ash & Moss admin dashboard — Next.js via OpenNext on Workers
-  "name": "ashandmoss-dash",
+  // Furniture (ecom) admin dashboard — Next.js via OpenNext on Workers
+  "name": "ecom-dash",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-14",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,6 +8,6 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "routes": [{ "pattern": "dash.ashandmoss.com", "custom_domain": true }],
+  "routes": [{ "pattern": "dash.basilpot.com", "custom_domain": true }],
   "observability": { "enabled": true }
 }

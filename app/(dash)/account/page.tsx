@@ -3,10 +3,10 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Section, SettingsHeader, FormSkeleton } from "@/components/site-config-shared";
+import { Button } from "@repo/ui";
+import { Input } from "@repo/ui";
+import { Label } from "@repo/ui";
+import { Section, SettingsHeader, FormSkeleton } from "@repo/ui";
 import { KeyRound, Loader2 } from "lucide-react";
 
 async function apiMessage(res: Response, fallback: string) {
