@@ -82,10 +82,6 @@ export default function ContactPage() {
 
   return (
     <>
-      <SettingsHeader
-        title="Contact & Social Media"
-        description="How customers reach you, and the social profiles linked from the storefront."
-      />
       <form
         onSubmit={(e) => {
           e.preventDefault();

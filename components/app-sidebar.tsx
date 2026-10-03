@@ -8,7 +8,7 @@ import {
   LucideFolder,
   LucideForm,
   LucideGaugeCircle,
-  LucideKeyRound,
+  LucideSettings,
   LucideImage,
   LucideLayers,
   LucideNewspaper,
@@ -19,7 +19,6 @@ import {
   LucideTag,
   LucideBoxes,
   LucideWallet,
-  LucidePanelsTopLeft,
   type LucideIcon,
 } from "lucide-react"
 
@@ -64,13 +63,6 @@ export const navGroups: {
       { title: "Footer", url: "/footer", icon: LucideColumnsSettings },
     ],
   },
-  {
-    label: "Settings",
-    items: [
-      { title: "Homepage", url: "/settings/homepage", icon: LucidePanelsTopLeft },
-      { title: "API keys", url: "/settings/api-keys", icon: LucideKeyRound },
-    ],
-  },
 ]
 
 const QUICK_ACTIONS = [
@@ -82,6 +74,8 @@ const QUICK_ACTIONS = [
   { title: "Orders", url: "/orders", icon: LucideReceipt },
   { title: "Stock", url: "/stock", icon: LucideBoxes },
   { title: "Payments", url: "/payments", icon: LucideWallet },
+  // Lands on the API tab; the rest of settings is one click away in the tab bar.
+  { title: "Settings", url: "/settings/api-keys", icon: LucideSettings },
 ]
 
 const SECONDARY_NAV: {

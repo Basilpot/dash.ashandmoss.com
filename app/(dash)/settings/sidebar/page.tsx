@@ -66,10 +66,6 @@ export default function SidebarPage() {
 
   return (
     <>
-      <SettingsHeader
-        title="Sidebar"
-        description="Choose which items appear in the dashboard sidebar. Changes apply immediately."
-      />
       <div className="space-y-4">
         {navGroups.map((group) => (
           <div key={group.label} className="space-y-1.5">

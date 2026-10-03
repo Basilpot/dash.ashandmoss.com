@@ -126,10 +126,6 @@ export default function BrandPage() {
 
   return (
     <>
-      <SettingsHeader
-        title="Basic Brand"
-        description="Your business name, logo and short introduction shown on the storefront."
-      />
       <form
         onSubmit={handleSave}
       >

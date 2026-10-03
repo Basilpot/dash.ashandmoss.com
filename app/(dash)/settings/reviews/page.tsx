@@ -48,10 +48,6 @@ export default function ReviewsPage() {
 
   return (
     <>
-      <SettingsHeader
-        title="Reviews"
-        description="Review counts and links shown as social proof on the storefront."
-      />
       <form
         onSubmit={(e) => {
           e.preventDefault();

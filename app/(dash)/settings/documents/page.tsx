@@ -41,10 +41,6 @@ export default function DocumentsPage() {
 
   return (
     <>
-      <SettingsHeader
-        title="Documents"
-        description="Downloadable brochures and policy files shown in the storefront documents route."
-      />
       <form
         onSubmit={(e) => {
           e.preventDefault();

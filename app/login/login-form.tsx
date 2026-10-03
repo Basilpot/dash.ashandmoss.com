@@ -14,7 +14,6 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
 import Link from "next/link";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type FormValues = {
   email: string;
@@ -76,24 +75,23 @@ export function LoginForm({
 
   return (
     <div
-      className={cn("flex flex-col items-center gap-6 w-full max-w-sm", className)}
+      className={cn("flex w-full max-w-sm flex-col", className)}
       {...props}
     >
-      <Card className="w-full">
-        <CardHeader className="flex flex-col items-center gap-2 text-center pb-2">
-          <Link
-            href="/"
-            className="flex flex-col items-center gap-2 font-medium"
-          >
-            <div className="flex size-10 items-center justify-center rounded-lg bg-foreground text-background">
-              <UserCog className="size-5" />
-            </div>
-            <span className="sr-only">Tasche</span>
-          </Link>
-          <CardTitle className="text-xl">Login to your account</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)}>
+      {/* No card. The reference sets the form straight on the page: a bordered
+          panel around two inputs and a button is a container drawn around the
+          only thing on screen, which it then has to compete with. */}
+      <div className="flex flex-col items-center text-center">
+        <Link href="/" aria-label="Ash and Moss home" className="flex flex-col items-center">
+          <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
+            <UserCog className="size-5" />
+          </span>
+          <span className="sr-only">Ash &amp; Moss</span>
+        </Link>
+        <h1 className="mt-5 text-2xl tracking-tight">Sign in to Ash &amp; Moss</h1>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
             <FieldGroup>
               <Field>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
@@ -121,11 +119,15 @@ export function LoginForm({
               </Field>
             </FieldGroup>
           </form>
-          <p className="mt-4 text-center text-sm text-muted-foreground">
-            New here? <Link href="/signup" className="text-foreground underline">Create your store</Link>
-          </p>
-        </CardContent>
-      </Card>
+
+      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+        <Link href="/signup" className="hover:text-foreground">
+          Create your store
+        </Link>
+        <Link href="/verify-email" className="hover:text-foreground">
+          Verify email
+        </Link>
+      </div>
     </div>
   );
 }
