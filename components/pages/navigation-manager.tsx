@@ -903,10 +903,9 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
                 : "Customize your header navigation."
             }
           >
-            <button
-              type="button"
-              onClick={() => handleAutoNavChange(!autoNav)}
-              className="flex items-center gap-3 rounded-lg border border-border bg-card px-3 py-2 shadow-sm cursor-pointer transition-colors hover:bg-muted"
+            <label
+              htmlFor="auto-nav"
+              className="flex cursor-pointer items-center gap-3 rounded-lg border border-border bg-card px-3 py-2 shadow-sm transition-colors hover:bg-muted"
             >
               <span className="flex flex-col text-left">
                 <span className="text-sm font-medium leading-tight">
@@ -916,8 +915,8 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
                   Generate from site content
                 </span>
               </span>
-              <Switch id="auto-nav" checked={autoNav} className="pointer-events-none" />
-            </button>
+              <Switch id="auto-nav" checked={autoNav} onCheckedChange={handleAutoNavChange} />
+            </label>
           </PageHeader>
         </div>
         {!autoNav && (
