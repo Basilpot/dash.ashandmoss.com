@@ -58,9 +58,15 @@ export default function Blogs() {
           cache: "no-store",
           credentials: "include",
         });
-        const data = await response.json();
-        setPagination(data?.pagination ?? undefined);
-        setBlogs(data?.data ?? []);
+        const body = await response.json();
+        // /api/blogs answers { data: { data, pagination } } on the paginated
+        // route but { data: [...] } on the unpaginated one, and { message } with
+        // no data key when there is nothing to list. Normalise before it reaches
+        // state or DataTable gets a non-array and `data.slice` throws.
+        const payload = body?.data;
+        const rows = Array.isArray(payload) ? payload : payload?.data;
+        setBlogs(Array.isArray(rows) ? rows : []);
+        setPagination(payload?.pagination ?? body?.pagination ?? undefined);
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
         setBlogs([]);
