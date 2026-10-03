@@ -21,8 +21,7 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  AlertDialogTitle, } from "@repo/ui";
 import {
   ChevronDown,
   ChevronsUpDown,
