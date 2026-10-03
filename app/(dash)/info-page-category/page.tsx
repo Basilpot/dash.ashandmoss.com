@@ -49,7 +49,7 @@ interface FormState {
 export default function InfoPageCategories() {
   const searchParams = useSearchParams();
   const [categories, setCategories] = useState<InfoPageCategory[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const page = Number(searchParams.get("page") ?? "1");
   const limit = Number(searchParams.get("limit") ?? "10");
   const [pagination, setPagination] = useState<TPagination>();
@@ -76,7 +76,6 @@ export default function InfoPageCategories() {
 
   const fetchCategories = async () => {
     try {
-      setLoading(true);
       const params = new URLSearchParams({
         page: String(page),
         limit: String(limit),
@@ -99,8 +98,20 @@ export default function InfoPageCategories() {
     }
   };
 
+  // Changing page or search should still show the table's skeleton rows, but the
+  // flag cannot be set from inside the effect without cascading a render. This is
+  // React's documented alternative: adjust state while rendering.
+  const requestKey = `${page}|${limit}`;
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
+
   useEffect(() => {
-    fetchCategories();
+    void (async () => {
+      await fetchCategories();
+    })();
   }, [page, limit]);
 
   const openCreate = () => {

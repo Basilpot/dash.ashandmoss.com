@@ -38,23 +38,21 @@ export default function PaymentList() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const [page, setPage] = useState<number>(
-    Number(searchParams.get("page") ?? "1"),
-  );
-  const [limit, setLimit] = useState<number>(
-    Number(searchParams.get("limit") ?? "10"),
-  );
-  const [status, setStatus] = useState<string>(searchParams.get("status") ?? "all");
+  // Derived from the URL rather than mirrored into state: these three were only
+  // ever written by a setState-in-effect that copied them back out of the query
+  // string, which the compiler rightly flags as a cascading render.
+  const page = Number(searchParams.get("page") ?? "1");
+  const limit = Number(searchParams.get("limit") ?? "10");
+  const status = searchParams.get("status") ?? "all";
   const [pagination, setPagination] = useState<any>();
 
   const [payments, setPayments] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedPayment, setSelectedPayment] = useState<any>(null);
   const [isViewDialogOpen, setIsViewDialogOpen] = useState(false);
 
   const fetchPayments = async () => {
     try {
-      setLoading(true);
       const params = new URLSearchParams({ page: String(page), limit: String(limit) });
       const search = searchParams.get("search");
       if (search) params.set("search", search);
@@ -74,14 +72,18 @@ export default function PaymentList() {
     }
   };
 
-  useEffect(() => {
-    setPage(Number(searchParams.get("page") ?? "1"));
-    setLimit(Number(searchParams.get("limit") ?? "10"));
-    setStatus(searchParams.get("status") ?? "all");
-  }, [searchParams]);
+
+  const requestKey = `${page}|${limit}|${status}|${searchParams.get("search")}`;
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
 
   useEffect(() => {
-    fetchPayments();
+    void (async () => {
+      await fetchPayments();
+    })();
   }, [page, limit, status, searchParams.get("search")]);
 
   const openViewDialog = (payment: any) => {

@@ -58,7 +58,7 @@ export default function Testimonials() {
   const searchParams = useSearchParams();
 
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -79,7 +79,6 @@ export default function Testimonials() {
 
   const fetchTestimonials = async () => {
     try {
-      setLoading(true);
       const res = await fetch(
         `/api/testimonials?page=${page}&limit=${limit}`,
         {
@@ -99,8 +98,20 @@ export default function Testimonials() {
     }
   };
 
+  // Changing page or search should still show the table's skeleton rows, but the
+  // flag cannot be set from inside the effect without cascading a render. This is
+  // React's documented alternative: adjust state while rendering.
+  const requestKey = `${page}|${limit}|${searchParams}`;
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
+
   useEffect(() => {
-    fetchTestimonials();
+    void (async () => {
+      await fetchTestimonials();
+    })();
   }, [page, limit, searchParams]);
 
   const openCreateDialog = () => {

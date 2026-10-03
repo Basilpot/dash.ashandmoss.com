@@ -70,7 +70,6 @@ export default function StockPage() {
     : products;
 
   const load = async () => {
-    setLoading(true);
     setError(null);
     try {
       const res = await fetch(`/api/products?limit=100`, {
@@ -95,7 +94,9 @@ export default function StockPage() {
   };
 
   useEffect(() => {
-    load();
+    void (async () => {
+      await load();
+    })();
   }, []);
 
   const setVariantStock = async (variantId: string, stock: number) => {

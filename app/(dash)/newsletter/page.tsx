@@ -36,7 +36,6 @@ export default function NewsletterPage() {
 
   const fetchSubscribers = async () => {
     try {
-      setLoading(true);
       const res = await fetch(`${API}/newsletter`, { cache: "no-store" });
       if (!res.ok) throw new Error();
       const json = await res.json();
@@ -49,7 +48,9 @@ export default function NewsletterPage() {
   };
 
   useEffect(() => {
-    fetchSubscribers();
+    void (async () => {
+      await fetchSubscribers();
+    })();
   }, []);
 
   const handleAdd = async () => {

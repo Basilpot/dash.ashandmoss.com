@@ -71,11 +71,10 @@ export default function RedirectsManager() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [pendingDelete, setPendingDelete] = useState<Redirect | null>(null);
 
   const fetchRedirects = async () => {
-    setLoading(true);
     try {
       const res = await fetch(API_BASE);
       const json = await res.json();
@@ -85,8 +84,20 @@ export default function RedirectsManager() {
     }
   };
 
+  // Changing page or search should still show the table's skeleton rows, but the
+  // flag cannot be set from inside the effect without cascading a render. This is
+  // React's documented alternative: adjust state while rendering.
+  const requestKey = "redirects";
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
+
   useEffect(() => {
-    fetchRedirects();
+    void (async () => {
+      await fetchRedirects();
+    })();
   }, []);
 
   const openCreate = () => {

@@ -240,13 +240,8 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
   const API_BASE_URL = "/api";
   const endpoint = footer ? "footers" : "menus";
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
-
   const fetchMenu = async () => {
     try {
-      setLoading(true);
       const res = await fetch(`${API_BASE_URL}/${endpoint}`);
       const data = await res.json();
 
@@ -262,6 +257,13 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    void (async () => {
+      await fetchMenu();
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const saveMenu = async (items: MenuItem[]) => {
     try {

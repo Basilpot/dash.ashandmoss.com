@@ -58,7 +58,7 @@ export default function Authors() {
   const limit = Number(searchParams.get("limit") ?? "10");
 
   const [authors, setAuthors] = useState<Author[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState<TPagination>();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -82,7 +82,6 @@ export default function Authors() {
 
   const fetchAuthors = async () => {
     try {
-      setLoading(true);
       const res = await fetch(`/api/authors?page=${page}&limit=${limit}`, {
         cache: "no-store",
         credentials: "include",
@@ -98,8 +97,20 @@ export default function Authors() {
     }
   };
 
+  // Changing page or search should still show the table's skeleton rows, but the
+  // flag cannot be set from inside the effect without cascading a render. This is
+  // React's documented alternative: adjust state while rendering.
+  const requestKey = `${page}|${limit}`;
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
+
   useEffect(() => {
-    fetchAuthors();
+    void (async () => {
+      await fetchAuthors();
+    })();
   }, [page, limit]);
 
   const openCreateDialog = () => {

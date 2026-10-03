@@ -84,7 +84,6 @@ export default function MediaLibraryPage() {
   }, [search]);
 
   const loadMedia = useCallback(async () => {
-    setLoading(true);
     try {
       const result = await listMedia({ page, limit, search: debouncedSearch || undefined });
       setMedia(result.data);
@@ -97,8 +96,20 @@ export default function MediaLibraryPage() {
     }
   }, [page, limit, debouncedSearch]);
 
+  // Changing page or search should still show the table's skeleton rows, but the
+  // flag cannot be set from inside the effect without cascading a render. This is
+  // React's documented alternative: adjust state while rendering.
+  const requestKey = `${page}|${limit}|${debouncedSearch}`;
+  const [lastRequestKey, setLastRequestKey] = useState(requestKey);
+  if (lastRequestKey !== requestKey) {
+    setLastRequestKey(requestKey);
+    setLoading(true);
+  }
+
   useEffect(() => {
-    loadMedia();
+    void (async () => {
+      await loadMedia();
+    })();
   }, [page, limit, debouncedSearch, loadMedia]);
 
   const handleUpload = async (files: FileList | null) => {
