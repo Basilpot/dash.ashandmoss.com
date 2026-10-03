@@ -9,12 +9,12 @@ import { Label } from "@repo/ui";
 import { toast } from "sonner";
 import { LucideMailPlus, LucideSend, LucideUserPlus, RefreshCw } from "lucide-react";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
 } from "@repo/ui";
 
 import { DataTable } from "@repo/ui";
@@ -115,42 +115,44 @@ export default function NewsletterPage() {
       <DataTable columns={createColumns(fetchSubscribers)} data={subscribers} isLoading={loading} />
 
       {/* Add Subscriber */}
-      <Dialog open={addOpen} onOpenChange={setAddOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Add Subscriber</DialogTitle>
-            <DialogDescription>
+      <Sheet open={addOpen} onOpenChange={setAddOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>Add Subscriber</SheetTitle>
+            <SheetDescription>
               Manually subscribe an email address.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-3">
-            <Label>Email</Label>
-            <Input
-              type="email"
-              placeholder="email@example.com"
-              value={addEmail}
-              onChange={(e) => setAddEmail(e.target.value)}
-            />
+            </SheetDescription>
+          </SheetHeader>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
+            <div className="space-y-3">
+              <Label>Email</Label>
+              <Input
+                type="email"
+                placeholder="email@example.com"
+                value={addEmail}
+                onChange={(e) => setAddEmail(e.target.value)}
+              />
+            </div>
           </div>
-          <DialogFooter>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button size="lg" onClick={handleAdd}>
               <LucideUserPlus className="mr-2 h-4 w-4" />
               Subscribe
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {/* Send Blast */}
-      <Dialog open={blastOpen} onOpenChange={setBlastOpen}>
-        <DialogContent className="sm:max-w-lg">
-          <DialogHeader>
-            <DialogTitle>Send Newsletter Blast</DialogTitle>
-            <DialogDescription>
+      <Sheet open={blastOpen} onOpenChange={setBlastOpen}>
+        <SheetContent side="right" className="sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle>Send Newsletter Blast</SheetTitle>
+            <SheetDescription>
               Sends to all {activeCount} active subscribers.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4">
+            </SheetDescription>
+          </SheetHeader>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="space-y-2">
               <Label>Subject</Label>
               <Input
@@ -169,7 +171,7 @@ export default function NewsletterPage() {
               />
             </div>
           </div>
-          <DialogFooter>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button size="lg" onClick={handleBlast} disabled={sending}>
               {sending ? (
                 <RefreshCw className="mr-2 h-4 w-4 animate-spin" />
@@ -178,9 +180,9 @@ export default function NewsletterPage() {
               )}
               {sending ? "Sending..." : "Send"}
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

@@ -18,6 +18,14 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
@@ -265,64 +273,66 @@ export default function Categories() {
         emptyMessage="No categories yet."
       />
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {isEdit ? "Edit Category" : "Add New Category"}
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
+            </SheetTitle>
+            <SheetDescription className="text-sm text-muted-foreground">
               {isEdit
                 ? "Update the category details."
                 : "Add a new category for grouping products."}
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
-            <div className="space-y-2">
-              <Label htmlFor="name">Category Name</Label>
-              <Input {...register("name")} type="text" required />
+            </SheetDescription>
+          </SheetHeader>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">Category Name</Label>
+                <Input {...register("name")} type="text" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="slug">Category Slug (Unique)</Label>
+                <Input {...register("slug")} type="text" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="parentId">Parent Category</Label>
+                <select
+                  {...register("parentId")}
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                >
+                  <option value="">None (top level)</option>
+                  {parentOptions.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {"\u00A0".repeat(c.depth * 2)}
+                      {c.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="sortOrder">Sort Order</Label>
+                <Input {...register("sortOrder", { setValueAs: (v) => Number(v) })} type="number" />
+              </div>
+              <div className="flex items-center gap-2"><Checkbox id="categoryFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="categoryFeatured">Featured on storefront</Label></div>
+              <div className="flex items-center gap-2"><Checkbox id="categoryNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="categoryNav">Promote to top-level navigation</Label></div>
+              <div className="space-y-2">
+                <Label>Category Image</Label>
+                <ImageUpload
+                  value={categoryImage.url || null}
+                  onChange={(v) => setCategoryImage(v)}
+                  label=""
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="slug">Category Slug (Unique)</Label>
-              <Input {...register("slug")} type="text" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="parentId">Parent Category</Label>
-              <select
-                {...register("parentId")}
-                className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-              >
-                <option value="">None (top level)</option>
-                {parentOptions.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {"\u00A0".repeat(c.depth * 2)}
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="sortOrder">Sort Order</Label>
-              <Input {...register("sortOrder", { setValueAs: (v) => Number(v) })} type="number" />
-            </div>
-            <div className="flex items-center gap-2"><Checkbox id="categoryFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="categoryFeatured">Featured on storefront</Label></div>
-            <div className="flex items-center gap-2"><Checkbox id="categoryNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="categoryNav">Promote to top-level navigation</Label></div>
-            <div className="space-y-2">
-              <Label>Category Image</Label>
-              <ImageUpload
-                value={categoryImage.url || null}
-                onChange={(v) => setCategoryImage(v)}
-                label=""
-              />
-            </div>
-            <DialogFooter>
+            <SheetFooter className="flex-row justify-end gap-2">
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>

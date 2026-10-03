@@ -18,6 +18,14 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
@@ -225,19 +233,20 @@ export default function Brands() {
         emptyMessage="No brands yet."
       />
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {isEdit ? "Edit Brand" : "Add New Brand"}
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
+            </SheetTitle>
+            <SheetDescription className="text-sm text-muted-foreground">
               {isEdit
                 ? "Update the brand details."
                 : "Add a new brand for your products."}
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-2">
+            </SheetDescription>
+          </SheetHeader>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="space-y-2">
               <Label htmlFor="name">Brand Name</Label>
               <Input {...register("name")} type="text" required />
@@ -267,14 +276,15 @@ export default function Brands() {
                 label=""
               />
             </div>
-            <DialogFooter>
+            </div>
+            <SheetFooter className="flex-row justify-end gap-2">
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>

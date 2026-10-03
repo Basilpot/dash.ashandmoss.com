@@ -15,6 +15,13 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetFooter,
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 import { toast } from "sonner";
 import { Edit3, Plus, Trash2Icon } from "lucide-react";
@@ -228,15 +235,15 @@ export default function RedirectsManager() {
         emptyMessage="No redirects yet. Add one above."
       />
 
-      {/* Create / Edit Dialog */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      {/* Create / Edit Sheet */}
+      <Sheet open={dialogOpen} onOpenChange={setDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {editingId ? "Edit Redirect" : "Add Redirect"}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col gap-4 py-2">
+            </SheetTitle>
+          </SheetHeader>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="space-y-1.5">
               <Label className="font-bold text-sm">From</Label>
               <Input
@@ -254,16 +261,16 @@ export default function RedirectsManager() {
               />
             </div>
           </div>
-          <DialogFooter>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button variant="ghost" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
             <Button onClick={handleSave} disabled={saving}>
               {saving ? "Saving..." : "Save"}
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {/* Delete Confirm Dialog */}
       <Dialog

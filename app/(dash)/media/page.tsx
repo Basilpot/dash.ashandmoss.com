@@ -14,6 +14,13 @@ import {
   DialogFooter,
 } from "@repo/ui";
 import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetFooter,
+} from "@repo/ui";
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -323,11 +330,12 @@ export default function MediaLibraryPage() {
         </>
       )}
 
-      <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
-        <DialogContent className="sm:max-w-lg rounded-lg">
-          <DialogHeader>
-            <DialogTitle className="text-[#171717]">Edit Image Metadata</DialogTitle>
-          </DialogHeader>
+      <Sheet open={editDialogOpen} onOpenChange={setEditDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-lg">
+          <SheetHeader>
+            <SheetTitle className="text-[#171717]">Edit Image Metadata</SheetTitle>
+          </SheetHeader>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
           {editingMedia && (
             <div className="space-y-4">
               <div className="flex gap-4">
@@ -416,14 +424,15 @@ export default function MediaLibraryPage() {
               </div>
             </div>
           )}
-          <DialogFooter>
+          </div>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>Cancel</Button>
             <Button onClick={handleSave} disabled={saving}>
               {saving ? "Saving..." : "Save"}
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {editingMedia && (
         <CropDialog

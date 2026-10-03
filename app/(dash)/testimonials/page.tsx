@@ -20,6 +20,14 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@repo/ui";
 
 import {
   Edit3,
@@ -263,54 +271,56 @@ export default function Testimonials() {
         emptyMessage="No testimonials found."
       />
 
-      {/* Add/Edit Dialog */}
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      {/* Add/Edit Sheet */}
+      <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {isEdit ? "Edit Testimonial" : "Add New Testimonial"}
-            </DialogTitle>
-            <DialogDescription className="text-sm text-muted-foreground">
+            </SheetTitle>
+            <SheetDescription className="text-sm text-muted-foreground">
               {isEdit
                 ? "Update the testimonial details."
                 : "Add a new testimonial from a customer."}
-            </DialogDescription>
-          </DialogHeader>
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="author">Author</Label>
-              <Input {...register("author")} type="text" required />
+            </SheetDescription>
+          </SheetHeader>
+          <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
+              <div className="space-y-2">
+                <Label htmlFor="author">Author</Label>
+                <Input {...register("author")} type="text" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="content">Content</Label>
+                <Textarea {...register("content")} rows={4} required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="rating">Rating (1–5)</Label>
+                <Input
+                  {...register("rating")}
+                  type="number"
+                  min={1}
+                  max={5}
+                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>Media</Label>
+                <ImageUpload
+                  value={testimonialMedia.url || null}
+                  onChange={(v) => setTestimonialMedia(v)}
+                  label=""
+                />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="content">Content</Label>
-              <Textarea {...register("content")} rows={4} required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="rating">Rating (1–5)</Label>
-              <Input
-                {...register("rating")}
-                type="number"
-                min={1}
-                max={5}
-                required
-              />
-            </div>
-            <div className="space-y-2">
-              <Label>Media</Label>
-              <ImageUpload
-                value={testimonialMedia.url || null}
-                onChange={(v) => setTestimonialMedia(v)}
-                label=""
-              />
-            </div>
-            <DialogFooter>
+            <SheetFooter className="flex-row justify-end gap-2">
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       {/* Delete Confirmation Dialog */}
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>

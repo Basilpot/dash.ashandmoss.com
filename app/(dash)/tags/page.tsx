@@ -18,6 +18,14 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
@@ -245,50 +253,51 @@ export default function Tags() {
         emptyMessage="No tags yet."
       />
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {isEdit ? "Edit Tag" : "Add New Tag"}
-            </DialogTitle>
-            <DialogDescription>
+            </SheetTitle>
+            <SheetDescription>
               {isEdit
                 ? "Update the tag details."
                 : "Create a new tag."}
-            </DialogDescription>
-          </DialogHeader>
+            </SheetDescription>
+          </SheetHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-            <div className="space-y-2">
-              <Label className="flex gap-4 items-center">Tag Name</Label>
-              <Input {...register("name")} required />
+          <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
+              <div className="space-y-2">
+                <Label className="flex gap-4 items-center">Tag Name</Label>
+                <Input {...register("name")} required />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Slug</Label>
+                <Input {...register("slug")} required />
+              </div>
+
+              <div className="space-y-2">
+                <Label>Description (Optional)</Label>
+                <TipTapField
+                  control={control}
+                  name="description"
+                  placeholder="Add a description for this tag/section."
+                />
+              </div>
+              <div className="space-y-2"><Label htmlFor="tagSortOrder">Sort order</Label><Input id="tagSortOrder" type="number" {...register("sortOrder", { valueAsNumber: true })} /></div>
+              <div className="flex items-center gap-2"><Checkbox id="tagFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="tagFeatured">Featured on storefront</Label></div>
+              <div className="flex items-center gap-2"><Checkbox id="tagNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="tagNav">Promote to top-level navigation</Label></div>
             </div>
-
-            <div className="space-y-2">
-              <Label>Slug</Label>
-              <Input {...register("slug")} required />
-            </div>
-
-            <div className="space-y-2">
-              <Label>Description (Optional)</Label>
-              <TipTapField
-                control={control}
-                name="description"
-                placeholder="Add a description for this tag/section."
-              />
-            </div>
-            <div className="space-y-2"><Label htmlFor="tagSortOrder">Sort order</Label><Input id="tagSortOrder" type="number" {...register("sortOrder", { valueAsNumber: true })} /></div>
-            <div className="flex items-center gap-2"><Checkbox id="tagFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="tagFeatured">Featured on storefront</Label></div>
-            <div className="flex items-center gap-2"><Checkbox id="tagNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="tagNav">Promote to top-level navigation</Label></div>
-
-            <DialogFooter>
+            <SheetFooter className="flex-row justify-end gap-2">
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>

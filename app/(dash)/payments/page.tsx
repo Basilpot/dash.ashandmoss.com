@@ -7,12 +7,12 @@ import { PageHeader } from "@repo/ui";
 import { Button } from "@repo/ui";
 import { Badge } from "@repo/ui";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
 } from "@repo/ui";
 import {
   Select,
@@ -203,15 +203,16 @@ export default function PaymentList() {
         toolbar={statusFilter}
       />
 
-      <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Payment Details</DialogTitle>
-            <DialogDescription>
+      <Sheet open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>Payment Details</SheetTitle>
+            <SheetDescription>
               Payment #{selectedPayment?.id}
-            </DialogDescription>
-          </DialogHeader>
+            </SheetDescription>
+          </SheetHeader>
 
+          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto px-4">
           {selectedPayment && (
             <div className="space-y-3">
               <div className="grid grid-cols-2 gap-3">
@@ -275,12 +276,13 @@ export default function PaymentList() {
               )}
             </div>
           )}
+          </div>
 
-          <DialogFooter>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button onClick={() => setIsViewDialogOpen(false)}>Close</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

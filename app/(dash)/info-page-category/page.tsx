@@ -15,6 +15,13 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetFooter,
+} from "@repo/ui";
 import { Input } from "@repo/ui";
 import { Label } from "@repo/ui";
 import {
@@ -257,15 +264,15 @@ export default function InfoPageCategories() {
         emptyMessage="No categories yet. Create one to get started."
       />
 
-      {/* Create / Edit Dialog */}
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      {/* Create / Edit Sheet */}
+      <Sheet open={dialogOpen} onOpenChange={setDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {editingId ? "Edit Category" : "New Category"}
-            </DialogTitle>
-          </DialogHeader>
-          <div className="flex flex-col gap-4 py-2">
+            </SheetTitle>
+          </SheetHeader>
+          <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="flex flex-col gap-1.5">
               <Label className="font-bold text-sm">Name</Label>
               <Input
@@ -292,16 +299,16 @@ export default function InfoPageCategories() {
               />
             </div>
           </div>
-          <DialogFooter>
+          <SheetFooter className="flex-row justify-end gap-2">
             <Button variant="ghost" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>
             <Button onClick={handleSave} disabled={formLoading}>
               {formLoading ? "Saving..." : "Save"}
             </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {/* Delete Confirm Dialog */}
       <Dialog

@@ -22,6 +22,14 @@ import {
   DialogFooter,
   DialogDescription,
 } from "@repo/ui";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
+} from "@repo/ui";
 import { DataTable } from "@repo/ui";
 import { TPagination } from "@/app/(dash)/types/pagination";
 import { getFullImageUrl } from "@repo/ui";
@@ -261,113 +269,114 @@ export default function Authors() {
         emptyMessage="No authors found."
       />
 
-      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>
+      <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-md">
+          <SheetHeader>
+            <SheetTitle>
               {isEdit ? "Edit Author" : "Add New Author"}
-            </DialogTitle>
-            <DialogDescription>
+            </SheetTitle>
+            <SheetDescription>
               {isEdit
                 ? "Update the author details."
                 : "Create a new author."}
-            </DialogDescription>
-          </DialogHeader>
+            </SheetDescription>
+          </SheetHeader>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
-            <div className="space-y-2">
-              <Label>Profile Image</Label>
-              {preview ? (
-                <div className="relative w-32 h-32 border rounded-md overflow-hidden">
-                  <Image
-                    src={getFullImageUrl(preview)}
-                    alt="Profile preview"
-                    fill
-                    className="object-cover"
-                    unoptimized
-                  />
+          <form onSubmit={handleSubmit(onSubmit)} className="flex min-h-0 flex-1 flex-col">
+            <div className="flex flex-1 flex-col gap-4 overflow-y-auto px-4">
+              <div className="space-y-2">
+                <Label>Profile Image</Label>
+                {preview ? (
+                  <div className="relative w-32 h-32 border rounded-md overflow-hidden">
+                    <Image
+                      src={getFullImageUrl(preview)}
+                      alt="Profile preview"
+                      fill
+                      className="object-cover"
+                      unoptimized
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setPreview(null)}
+                      className="absolute top-1 right-1 bg-primary/90 text-background rounded-full p-1 z-10"
+                    >
+                      <X size={14} />
+                    </button>
+                  </div>
+                ) : (
                   <button
                     type="button"
-                    onClick={() => setPreview(null)}
-                    className="absolute top-1 right-1 bg-primary/90 text-background rounded-full p-1 z-10"
+                    onClick={() => setPickerOpen(true)}
+                    className="flex flex-col items-center justify-center w-32 h-32 border border-dashed rounded-md cursor-pointer text-muted-foreground hover:bg-primary/10 hover:text-foreground transition-colors shrink-0"
                   >
-                    <X size={14} />
+                    <Plus className="h-5 w-5 mb-1" />
+                    <span className="text-xs font-medium">Add Media</span>
                   </button>
-                </div>
-              ) : (
-                <button
-                  type="button"
-                  onClick={() => setPickerOpen(true)}
-                  className="flex flex-col items-center justify-center w-32 h-32 border border-dashed rounded-md cursor-pointer text-muted-foreground hover:bg-primary/10 hover:text-foreground transition-colors shrink-0"
-                >
-                  <Plus className="h-5 w-5 mb-1" />
-                  <span className="text-xs font-medium">Add Media</span>
-                </button>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label>Name</Label>
-              <Input {...register("name")} required />
-            </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-2">
-                <Label>Username</Label>
-                <Input {...register("username")} required />
-              </div>
-              <div className="space-y-2">
-                <Label>Email</Label>
-                <Input
-                  type="email"
-                  {...register("email", { required: "Email is required" })}
-                  required
-                />
-              </div>
-            </div>
-
-            {!isEdit && (
-              <div className="space-y-2">
-                <Label>Password</Label>
-                <Input
-                  type="password"
-                  {...register("password", {
-                    required: "Password is required",
-                    minLength: {
-                      value: 8,
-                      message: "Minimum 8 characters",
-                    },
-                  })}
-                />
-                {errors.password && (
-                  <p className="text-sm text-red-500">
-                    {errors.password.message}
-                  </p>
                 )}
               </div>
-            )}
 
-            <div className="space-y-2">
-              <Label>Bio</Label>
-              <Textarea
-                {...register("bio")}
-                placeholder="Short bio"
-                rows={3}
-              />
+              <div className="space-y-2">
+                <Label>Name</Label>
+                <Input {...register("name")} required />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2">
+                  <Label>Username</Label>
+                  <Input {...register("username")} required />
+                </div>
+                <div className="space-y-2">
+                  <Label>Email</Label>
+                  <Input
+                    type="email"
+                    {...register("email", { required: "Email is required" })}
+                    required
+                  />
+                </div>
+              </div>
+
+              {!isEdit && (
+                <div className="space-y-2">
+                  <Label>Password</Label>
+                  <Input
+                    type="password"
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: {
+                        value: 8,
+                        message: "Minimum 8 characters",
+                      },
+                    })}
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-500">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+              )}
+
+              <div className="space-y-2">
+                <Label>Bio</Label>
+                <Textarea
+                  {...register("bio")}
+                  placeholder="Short bio"
+                  rows={3}
+                />
+              </div>
+
+              {errors.email && (
+                <p className="text-sm text-red-500">{errors.email.message}</p>
+              )}
             </div>
-
-            {errors.email && (
-              <p className="text-sm text-red-500">{errors.email.message}</p>
-            )}
-
-            <DialogFooter>
+            <SheetFooter className="flex-row justify-end gap-2">
               <Button type="submit" size="lg" disabled={isSubmitting}>
                 {isEdit ? "Update" : "Add"}
               </Button>
-            </DialogFooter>
+            </SheetFooter>
           </form>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <Dialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
         <DialogContent>

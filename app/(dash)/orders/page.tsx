@@ -7,12 +7,12 @@ import { PageHeader } from "@repo/ui";
 import { Button } from "@repo/ui";
 import { Badge } from "@repo/ui";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+  SheetFooter,
 } from "@repo/ui";
 import {
   Select,
@@ -299,15 +299,16 @@ export default function OrderList() {
         emptyMessage="No orders found"
       />
 
-      <Dialog open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Order Details</DialogTitle>
-            <DialogDescription>
+      <Sheet open={isViewDialogOpen} onOpenChange={setIsViewDialogOpen}>
+        <SheetContent side="right" className="sm:max-w-xl">
+          <SheetHeader>
+            <SheetTitle>Order Details</SheetTitle>
+            <SheetDescription>
               Order {selectedOrder?.orderNumber}
-            </DialogDescription>
-          </DialogHeader>
+            </SheetDescription>
+          </SheetHeader>
 
+          <div className="flex min-h-0 flex-1 flex-col gap-5 overflow-y-auto px-4">
           {selectedOrder && (
             <div className="space-y-5">
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -429,8 +430,9 @@ export default function OrderList() {
               </a>
             </div>
           )}
+          </div>
 
-          <DialogFooter className="flex gap-2">
+          <SheetFooter className="flex-row justify-end gap-2">
             {selectedOrder?.status === "CONFIRMED" && (
               <Button
                 variant="secondary"
@@ -443,9 +445,9 @@ export default function OrderList() {
               </Button>
             )}
             <Button onClick={() => setIsViewDialogOpen(false)}>Close</Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
