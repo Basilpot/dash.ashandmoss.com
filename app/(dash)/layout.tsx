@@ -68,6 +68,7 @@ const AdminDashboardLayout = async ({
     >
       <AppSidebar
         user={{ name: admin.username, email: admin.email }}
+        storeName={companyName ?? FALLBACK_NAME}
       />
       <SidebarInset className="min-h-screen flex flex-col">
         <SiteHeader />

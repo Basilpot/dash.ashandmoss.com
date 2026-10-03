@@ -85,9 +85,11 @@ const SECONDARY_NAV: {
 
 export function AppSidebar({
   user,
+  storeName,
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
   user?: { name: string; email: string }
+  storeName?: string
 }) {
   const hidden = useSidebarStore((s) => s.hidden)
   const setHidden = useSidebarStore((s) => s.setHidden)
@@ -116,7 +118,7 @@ export function AppSidebar({
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
-        <SidebarMenu><SidebarMenuItem className="px-2 py-1 font-semibold">Store dashboard</SidebarMenuItem></SidebarMenu>
+        <SidebarMenu><SidebarMenuItem className="px-2 py-1 font-semibold truncate">{storeName ?? "Store dashboard"}</SidebarMenuItem></SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} />
