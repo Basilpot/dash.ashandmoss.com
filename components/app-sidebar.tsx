@@ -8,6 +8,7 @@ import {
   LucideFolder,
   LucideForm,
   LucideGaugeCircle,
+  LucideKeyRound,
   LucideImage,
   LucideLayers,
   LucideNewspaper,
@@ -63,11 +64,17 @@ export const navGroups: {
       { title: "Footer", url: "/footer", icon: LucideColumnsSettings },
     ],
   },
+  {
+    label: "Settings",
+    items: [
+      { title: "Homepage", url: "/settings/homepage", icon: LucidePanelsTopLeft },
+      { title: "API keys", url: "/settings/api-keys", icon: LucideKeyRound },
+    ],
+  },
 ]
 
 const QUICK_ACTIONS = [
   { title: "Dashboard", url: "/dashboard", icon: LucideGaugeCircle },
-  { title: "Homepage", url: "/settings/homepage", icon: LucidePanelsTopLeft },
   { title: "Products", url: "/products", icon: LucidePackage },
   { title: "Categories", url: "/categories", icon: LucideFolder },
   { title: "Brands", url: "/brands", icon: LucideBadgeCheck },
