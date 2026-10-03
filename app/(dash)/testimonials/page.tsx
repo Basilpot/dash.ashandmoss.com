@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { PageHeader } from "@repo/ui";
+import { EmptyState, PageHeader } from "@repo/ui";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@repo/ui";
@@ -29,11 +29,7 @@ import {
   SheetFooter,
 } from "@repo/ui";
 
-import {
-  Edit3,
-  LucidePlus,
-  Trash2Icon,
-} from "lucide-react";
+import { Edit3, LucideMessageSquareQuote, LucidePlus, Trash2Icon } from "lucide-react";
 
 import { TPagination } from "@/app/(dash)/types/pagination";
 import { ImageUpload } from "@repo/ui";
@@ -279,7 +275,19 @@ export default function Testimonials() {
         data={testimonials}
         pagination={pagination}
         isLoading={loading}
-        emptyMessage="No testimonials found."
+        emptyState={
+          <EmptyState
+            icon={LucideMessageSquareQuote}
+            title="No testimonials yet"
+            description="Show social proof on product pages."
+            action={(
+              <Button onClick={openCreateDialog}>
+                <LucidePlus className="mr-2" size={18} />
+                Add testimonial
+              </Button>
+            )}
+          />
+        }
       />
 
       {/* Add/Edit Sheet */}

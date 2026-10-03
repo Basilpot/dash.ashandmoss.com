@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "sonner";
-import { PageHeader } from "@repo/ui";
+import { EmptyState, PageHeader } from "@repo/ui";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@repo/ui";
@@ -28,7 +28,7 @@ import {
 } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
+import { Edit3, LucideFolder, LucidePlus, Trash2Icon } from "lucide-react";
 
 import { DataTable } from "@repo/ui";
 import { ImageUpload } from "@repo/ui";
@@ -71,7 +71,9 @@ export default function Categories() {
   const searchParams = useSearchParams();
 
   const [categories, setCategories] = useState<CategoryNode[]>([]);
-  const [loading, setLoading] = useState(false);
+  // The fetch runs on mount, so the first render genuinely is loading. Starting
+  // at false showed the empty state for a beat before the rows arrived.
+  const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -270,7 +272,19 @@ export default function Categories() {
         columns={categoryColumns}
         data={flatRows}
         isLoading={loading}
-        emptyMessage="No categories yet."
+        emptyState={
+          <EmptyState
+            icon={LucideFolder}
+            title="No categories yet"
+            description="Categories are the top level of your catalogue structure."
+            action={(
+              <Button onClick={openCreateDialog}>
+                <LucidePlus className="mr-2" size={18} />
+                Add category
+              </Button>
+            )}
+          />
+        }
       />
 
       <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>

@@ -2,7 +2,7 @@
 
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { PageHeader } from "@repo/ui";
+import { EmptyState, PageHeader } from "@repo/ui";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 
@@ -28,7 +28,7 @@ import {
 } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
+import { Edit3, LucidePlus, LucideTag, Trash2Icon } from "lucide-react";
 
 import { DataTable } from "@repo/ui";
 import { TPagination } from "@/app/(dash)/types/pagination";
@@ -49,7 +49,9 @@ export default function Tags() {
   const searchParams = useSearchParams();
 
   const [tags, setTags] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  // The fetch runs on mount, so the first render genuinely is loading. Starting
+  // at false showed the empty state for a beat before the rows arrived.
+  const [loading, setLoading] = useState(true);
   const page = Number(searchParams.get("page") ?? "1");
   const limit = Number(searchParams.get("limit") ?? "10");
   const [pagination, setPagination] = useState<TPagination>();
@@ -250,7 +252,19 @@ export default function Tags() {
         data={tags}
         isLoading={loading}
         pagination={pagination}
-        emptyMessage="No tags yet."
+        emptyState={
+          <EmptyState
+            icon={LucideTag}
+            title="No tags yet"
+            description="Tags let customers filter and search across your catalogue."
+            action={(
+              <Button onClick={openCreateDialog}>
+                <LucidePlus className="mr-2" size={18} />
+                Add tag
+              </Button>
+            )}
+          />
+        }
       />
 
       <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>

@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { PageHeader } from "@repo/ui";
+import { EmptyState, PageHeader } from "@repo/ui";
 import { useSearchParams } from "next/navigation";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
-import { Edit3, LucidePlus, Plus, Trash2Icon, X } from "lucide-react";
+import { Edit3, LucidePlus, LucideUsers, Plus, Trash2Icon, X } from "lucide-react";
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Badge } from "@repo/ui";
@@ -277,7 +277,19 @@ export default function Authors() {
         data={authors}
         isLoading={loading}
         pagination={pagination}
-        emptyMessage="No authors found."
+        emptyState={
+          <EmptyState
+            icon={LucideUsers}
+            title="No authors yet"
+            description="Authors let you credit and manage the people behind your posts."
+            action={(
+              <Button onClick={openCreateDialog}>
+                <LucidePlus className="mr-2" size={18} />
+                Add author
+              </Button>
+            )}
+          />
+        }
       />
 
       <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>

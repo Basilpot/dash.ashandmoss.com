@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { PageHeader } from "@repo/ui";
+import { EmptyState, PageHeader } from "@repo/ui";
 import { useForm } from "react-hook-form";
 
 import { Button } from "@repo/ui";
@@ -28,7 +28,7 @@ import {
 } from "@repo/ui";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Edit3, LucidePlus, Trash2Icon } from "lucide-react";
+import { Edit3, LucidePlus, LucideTag, Trash2Icon } from "lucide-react";
 
 import { DataTable } from "@repo/ui";
 import { ImageUpload } from "@repo/ui";
@@ -47,7 +47,9 @@ export default function Brands() {
   const router = useRouter();
 
   const [brands, setBrands] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false);
+  // The fetch runs on mount, so the first render genuinely is loading. Starting
+  // at false showed the empty state for a beat before the rows arrived.
+  const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
@@ -230,7 +232,19 @@ export default function Brands() {
         columns={brandColumns}
         data={brands}
         isLoading={loading}
-        emptyMessage="No brands yet."
+        emptyState={
+          <EmptyState
+            icon={LucideTag}
+            title="No brands yet"
+            description="Brands group your products so customers can browse by maker."
+            action={(
+              <Button onClick={openCreateDialog}>
+                <LucidePlus className="mr-2" size={18} />
+                Add brand
+              </Button>
+            )}
+          />
+        }
       />
 
       <Sheet open={isDialogOpen} onOpenChange={setIsDialogOpen}>
