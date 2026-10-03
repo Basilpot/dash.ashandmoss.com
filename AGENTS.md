@@ -37,5 +37,5 @@ pnpm lint             # eslint (next/core-web-vitals + typescript); no-explicit-
 - Sidebar menu is `components/app-sidebar.tsx` (`navGroups`, `QUICK_ACTIONS`, `SECONDARY_NAV`) — add new pages there.
 - API client pattern: plain functions in `app/actions/index.ts`.
 - `/team` = marketing team members CRUD, NOT staff accounts. There is no billing/plans page yet (SaaS feature pending).
-- `DESIGN.md` documents the Vercel-inspired design system — treat as authoritative for UI work.
+- Design system is the **global `frontend-design` skill** (`~/.config/opencode/skills/frontend-design/`), which takes precedence over anything in this repo. `DESIGN.md` is only a pointer to it — read real values out of `app/globals.css`, `lib/font.ts` and `app/(dash)/layout.tsx`.
 - MCP: `next-devtools` via `.mcp.json`.
