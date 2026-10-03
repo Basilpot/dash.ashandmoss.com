@@ -118,7 +118,7 @@ export function AppSidebar({
   return (
     <Sidebar variant="inset" {...props}>
       <SidebarHeader>
-        <SidebarMenu><SidebarMenuItem className="px-2 py-1 font-semibold truncate">{storeName ?? "Store dashboard"}</SidebarMenuItem></SidebarMenu>
+        <SidebarMenu><SidebarMenuItem className="px-2 py-1 font-medium truncate">{storeName ?? "Store dashboard"}</SidebarMenuItem></SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={navMain} />

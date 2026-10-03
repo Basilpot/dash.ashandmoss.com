@@ -24,7 +24,7 @@ export const StatCard = ({
     <Card className="@container/card">
       <CardHeader>
         <CardDescription>{title ?? ""}</CardDescription>
-        <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+        <CardTitle className="text-2xl tabular-nums @[250px]/card:text-3xl">
           {value}
         </CardTitle>
         <CardAction>

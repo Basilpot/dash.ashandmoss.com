@@ -120,7 +120,7 @@ function ProductPreviewContent() {
 
       {listItems(product.images).length > 1 && (
         <section className="mb-6">
-          <h2 className="mb-3 text-xl font-semibold">
+          <h2 className="mb-3 text-xl">
             Photos ({listItems(product.images).length})
           </h2>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -140,7 +140,7 @@ function ProductPreviewContent() {
 
       {product.videoIntro && (
         <section className="mb-6">
-          <h2 className="mb-3 text-xl font-semibold">Video</h2>
+          <h2 className="mb-3 text-xl">Video</h2>
           <div className="aspect-video overflow-hidden rounded-lg border">
             <iframe
               src={product.videoIntro}
@@ -152,7 +152,7 @@ function ProductPreviewContent() {
         </section>
       )}
 
-      <h1 className="text-3xl font-bold tracking-tight">{product.title}</h1>
+      <h1 className="text-3xl tracking-tight">{product.title}</h1>
       {product.slug && (
         <p className="mt-1 text-sm text-muted-foreground">{product.slug}</p>
       )}
@@ -168,7 +168,7 @@ function ProductPreviewContent() {
       </div>
 
       {price != null && (
-        <div className="mt-4 text-lg font-semibold">
+        <div className="mt-4 text-lg font-medium">
           {compareAt != null && compareAt > 0 && (
             <span className="mr-2 text-muted-foreground line-through">
               {formatPrice(compareAt)}
@@ -183,7 +183,7 @@ function ProductPreviewContent() {
 
       {product.description && (
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-semibold">Description</h2>
+          <h2 className="mb-3 text-xl">Description</h2>
           <div
             className="tiptap prose prose-sm sm:prose-base max-w-none"
             dangerouslySetInnerHTML={{ __html: product.description }}
@@ -193,7 +193,7 @@ function ProductPreviewContent() {
 
       {listItems(product.attributes).length > 0 && (
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-semibold">Specifications</h2>
+          <h2 className="mb-3 text-xl">Specifications</h2>
           <div className="overflow-hidden rounded-lg border">
             <table className="w-full text-sm">
               <tbody>
@@ -211,7 +211,7 @@ function ProductPreviewContent() {
 
       {listItems(product.variants).length > 0 && (
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-semibold">Variants</h2>
+          <h2 className="mb-3 text-xl">Variants</h2>
           <div className="overflow-hidden rounded-lg border">
             <table className="w-full text-sm">
               <thead>
@@ -250,7 +250,7 @@ function ProductPreviewContent() {
 
       {listItems(product.faq).length > 0 && (
         <section className="mt-8">
-          <h2 className="mb-3 text-xl font-semibold">FAQ</h2>
+          <h2 className="mb-3 text-xl">FAQ</h2>
           <div className="space-y-3">
             {product.faq
               .flatMap((f: any) =>

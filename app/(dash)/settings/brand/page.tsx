@@ -280,7 +280,7 @@ export default function BrandPage() {
               Custom furniture, cut to your room — primary body font.
             </p>
             <p
-              className="mt-2 text-2xl font-bold"
+              className="mt-2 text-2xl"
               style={{
                 fontFamily: `"${getFont(fonts.secondary || DEFAULT_FONTS.secondary)?.family}", sans-serif`,
               }}

@@ -109,7 +109,7 @@ export default function AddOrEditAuthor() {
 
   return (
     <div className="mx-auto px-4 w-full">
-      <h1 className="text-3xl font-semibold mb-8">
+      <h1 className="text-3xl mb-8">
         {isEdit ? "Edit Author" : "Add Author"}
       </h1>
 

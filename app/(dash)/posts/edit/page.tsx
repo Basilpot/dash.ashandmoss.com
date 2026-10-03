@@ -194,7 +194,7 @@ const BlogFormInner = () => {
       <div>
         {/* Header and action buttons */}
         <div className="flex justify-between items-center mb-4">
-          <h2 className="font-bold text-xl">
+          <h2 className="text-xl">
             {slug ? "Edit Blog" : "Add New Blog"}
           </h2>
           <div className="btn-group flex gap-1 justify-center items-center">
@@ -238,19 +238,19 @@ const BlogFormInner = () => {
                   onChange={(v) => setCoverImage(v.url)}
                 />
                 <div className="flex flex-col gap-1">
-                  <Label htmlFor="tags" className="font-bold text-sm">
+                  <Label htmlFor="tags" className="text-sm">
                     Cover Image Alt
                   </Label>
                   <Input {...register("tags")} />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <Label htmlFor="metaTitle" className="font-bold text-sm">
+                  <Label htmlFor="metaTitle" className="text-sm">
                     Meta Title
                   </Label>
                   <Input {...register("metaTitle")} />
                 </div>
                 <div className="flex flex-col gap-1">
-                  <Label htmlFor="metaDescription" className="font-bold text-sm">
+                  <Label htmlFor="metaDescription" className="text-sm">
                     Meta Description
                   </Label>
                   <Input {...register("metaDescription")} />
@@ -262,14 +262,14 @@ const BlogFormInner = () => {
           {/* Title + Slug */}
           <div className="grid grid-cols-2 gap-1 w-full my-4">
             <div className="flex flex-col gap-1 w-full">
-              <Label htmlFor="title" className="font-bold text-sm">
+              <Label htmlFor="title" className="text-sm">
                 Title
               </Label>
               <Input {...register("title")} />
             </div>
 
             <div className="flex flex-col gap-1 w-full">
-              <Label htmlFor="slug" className="font-bold text-sm">
+              <Label htmlFor="slug" className="text-sm">
                 Slug/URL
               </Label>
               <div className="flex gap-1 items-center">
@@ -290,7 +290,7 @@ const BlogFormInner = () => {
           <div className="grid grid-cols-2 gap-1 w-full my-4">
             {/* Category Dropdown */}
             <div className="flex flex-col gap-1 w-full">
-              <Label htmlFor="category" className="font-bold text-sm">
+              <Label htmlFor="category" className="text-sm">
                 Category
               </Label>
               <Controller
@@ -318,7 +318,7 @@ const BlogFormInner = () => {
 
             {/* Status Dropdown */}
             <div className="flex flex-col gap-1 w-full">
-              <Label htmlFor="published" className="font-bold text-sm">
+              <Label htmlFor="published" className="text-sm">
                 Status
               </Label>
               <Controller
@@ -347,7 +347,7 @@ const BlogFormInner = () => {
 
           {/* Content Editor */}
           <div>
-            <Label htmlFor="content" className="font-bold text-sm">
+            <Label htmlFor="content" className="text-sm">
               Content
             </Label>
             <TipTapField minHeight={400} name="content" control={control} />

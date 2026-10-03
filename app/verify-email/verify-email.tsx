@@ -16,5 +16,5 @@ export function VerifyEmail({ token }: { token: string }) {
       })
       .catch(() => setMessage("Verification failed."));
   }, [token]);
-  return <div className="space-y-4 text-center"><h1 className="text-2xl font-semibold">Email verification</h1><p className="text-muted-foreground">{message}</p><Link href="/login" className="text-sm underline">Back to login</Link></div>;
+  return <div className="space-y-4 text-center"><h1 className="text-2xl">Email verification</h1><p className="text-muted-foreground">{message}</p><Link href="/login" className="text-sm underline">Back to login</Link></div>;
 }

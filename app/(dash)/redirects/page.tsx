@@ -245,7 +245,7 @@ export default function RedirectsManager() {
           </SheetHeader>
           <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="space-y-1.5">
-              <Label className="font-bold text-sm">From</Label>
+              <Label className="text-sm">From</Label>
               <Input
                 value={from}
                 onChange={(e) => setFrom(sanitizePath(e.target.value))}
@@ -253,7 +253,7 @@ export default function RedirectsManager() {
               />
             </div>
             <div className="space-y-1.5">
-              <Label className="font-bold text-sm">To</Label>
+              <Label className="text-sm">To</Label>
               <Input
                 value={to}
                 onChange={(e) => setTo(sanitizePath(e.target.value))}

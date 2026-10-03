@@ -109,7 +109,7 @@ export default function StoreSetupPage() {
       <div className="mb-8 flex items-center gap-3">
         <Rocket className="size-8 text-primary" />
         <div>
-          <h1 className="text-2xl font-bold">Store setup</h1>
+          <h1 className="text-2xl">Store setup</h1>
           <p className="text-sm text-muted-foreground">
             Basic details for your storefront. You can change these later.
           </p>

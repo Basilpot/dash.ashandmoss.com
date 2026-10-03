@@ -274,7 +274,7 @@ export default function InfoPageCategories() {
           </SheetHeader>
           <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
             <div className="flex flex-col gap-1.5">
-              <Label className="font-bold text-sm">Name</Label>
+              <Label className="text-sm">Name</Label>
               <Input
                 value={form.categoryName}
                 onChange={(e) =>
@@ -284,7 +284,7 @@ export default function InfoPageCategories() {
               />
             </div>
             <div className="flex flex-col gap-1.5">
-              <Label className="font-bold text-sm">
+              <Label className="text-sm">
                 Handle{" "}
                 <span className="text-muted-foreground font-normal text-xs">
                   (unique, lowercase, hyphenated)

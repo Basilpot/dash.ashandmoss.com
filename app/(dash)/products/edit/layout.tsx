@@ -38,7 +38,7 @@ function LayoutContent({ children }: Readonly<{ children: React.ReactNode }>) {
 
       <section className="flex-1 px-6">
         <div className="flex justify-between pr-4">
-          <h2 className="font-bold text-xl mb-6">{STEPS[currStep - 1]}</h2>
+          <h2 className="text-xl mb-6">{STEPS[currStep - 1]}</h2>
           <div className="flex gap-1">
             <Button
               type="button"
