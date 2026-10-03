@@ -211,16 +211,16 @@ export default function MediaLibraryPage() {
 
       <div className="flex items-center gap-2 mb-4">
         <div className="relative flex-1 max-w-sm">
-          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-[#888888]" />
+          <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
           <Input
             placeholder="Search by filename, alt, caption..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-8 h-9 text-sm rounded-sm border-[#ebebeb]"
+            className="pl-8 h-9 text-sm rounded-sm border-border"
           />
         </div>
         <Select value={String(limit)} onValueChange={(v) => { setLimit(Number(v)); setPage(1); }}>
-          <SelectTrigger className="w-24 h-9 rounded-sm border-[#ebebeb] text-sm">
+          <SelectTrigger className="w-24 h-9 rounded-sm border-border text-sm">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -234,15 +234,15 @@ export default function MediaLibraryPage() {
       {loading ? (
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
           {Array.from({ length: limit > 12 ? 12 : limit }).map((_, i) => (
-            <div key={i} className="aspect-square rounded-md bg-[#f5f5f5] animate-pulse" />
+            <div key={i} className="aspect-square rounded-md bg-muted animate-pulse" />
           ))}
         </div>
       ) : media.length === 0 ? (
-        <div className="text-center py-16 text-[#888888]">
+        <div className="text-center py-16 text-muted-foreground">
           <div className="text-4xl mb-3 opacity-30">
             <Upload className="h-12 w-12 mx-auto" />
           </div>
-          <p className="text-lg font-medium mb-1 text-[#171717]">No media yet</p>
+          <p className="text-lg font-medium mb-1 text-foreground">No media yet</p>
           <p className="text-sm">Upload images to get started</p>
         </div>
       ) : (
@@ -251,7 +251,7 @@ export default function MediaLibraryPage() {
             {media.map((item) => (
               <div
                 key={item.id}
-                className="group relative aspect-square rounded-md overflow-hidden ring-1 ring-inset ring-[#ebebeb] bg-white"
+                className="group relative aspect-square rounded-md overflow-hidden ring-1 ring-inset ring-ring bg-white"
               >
                 <GalleryImage
                   src={item.url}
@@ -264,7 +264,7 @@ export default function MediaLibraryPage() {
                       <Button
                         variant="secondary"
                         size="icon"
-                        className="h-7 w-7 bg-white/90 hover:bg-white text-[#171717]"
+                        className="h-7 w-7 bg-white/90 hover:bg-white text-foreground"
                         onClick={() => openEdit(item)}
                       >
                         <Pencil className="h-3 w-3" />
@@ -272,7 +272,7 @@ export default function MediaLibraryPage() {
                       <Button
                         variant="destructive"
                         size="icon"
-                        className="h-7 w-7 bg-[#ee0000]/90 hover:bg-[#ee0000]"
+                        className="h-7 w-7 bg-destructive/90 hover:bg-destructive"
                         onClick={() => {
                           setDeleteConfirm(item);
                           setDeleteDialogOpen(true);
@@ -304,7 +304,7 @@ export default function MediaLibraryPage() {
 
           {pagination && pagination.totalPages > 1 && (
             <div className="flex items-center justify-between mt-6">
-              <p className="text-sm text-[#888888]">
+              <p className="text-sm text-muted-foreground">
                 {pagination.total} total &middot; Page {pagination.page} of {pagination.totalPages}
               </p>
               <div className="flex gap-2">
@@ -333,31 +333,31 @@ export default function MediaLibraryPage() {
       <Sheet open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <SheetContent side="right" className="sm:max-w-lg">
           <SheetHeader>
-            <SheetTitle className="text-[#171717]">Edit Image Metadata</SheetTitle>
+            <SheetTitle className="text-foreground">Edit Image Metadata</SheetTitle>
           </SheetHeader>
           <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4">
           {editingMedia && (
             <div className="space-y-4">
               <div className="flex gap-4">
-                <div className="w-32 h-32 rounded-md overflow-hidden border border-[#ebebeb] shrink-0 bg-[#fafafa]">
+                <div className="w-32 h-32 rounded-md overflow-hidden border border-border shrink-0 bg-muted">
                   <img
                     src={getFullImageUrl(editingMedia.url)}
                     alt={editForm.alt || editingMedia.filename}
                     className="object-cover w-full h-full"
                   />
                 </div>
-                <div className="flex-1 space-y-1 text-sm text-[#888888]">
-                  <p><span className="font-medium text-[#171717]">File:</span> {editingMedia.filename}</p>
+                <div className="flex-1 space-y-1 text-sm text-muted-foreground">
+                  <p><span className="font-medium text-foreground">File:</span> {editingMedia.filename}</p>
                   {editingMedia.width && editingMedia.height && (
-                    <p><span className="font-medium text-[#171717]">Dimensions:</span> {editingMedia.width}&times;{editingMedia.height}</p>
+                    <p><span className="font-medium text-foreground">Dimensions:</span> {editingMedia.width}&times;{editingMedia.height}</p>
                   )}
                   {editingMedia.fileSize && (
-                    <p><span className="font-medium text-[#171717]">Size:</span> {formatFileSize(editingMedia.fileSize)}</p>
+                    <p><span className="font-medium text-foreground">Size:</span> {formatFileSize(editingMedia.fileSize)}</p>
                   )}
                   {editingMedia.mimeType && (
-                    <p><span className="font-medium text-[#171717]">Type:</span> {editingMedia.mimeType}</p>
+                    <p><span className="font-medium text-foreground">Type:</span> {editingMedia.mimeType}</p>
                   )}
-                  <p><span className="font-medium text-[#171717]">URL:</span> <span className="text-xs break-all">{editingMedia.url}</span></p>
+                  <p><span className="font-medium text-foreground">URL:</span> <span className="text-xs break-all">{editingMedia.url}</span></p>
                   <Button
                     variant="outline"
                     size="sm"
@@ -371,55 +371,55 @@ export default function MediaLibraryPage() {
               </div>
 
               <div className="space-y-1">
-                <Label className="text-sm font-medium text-[#171717]">Filename</Label>
+                <Label className="text-sm font-medium text-foreground">Filename</Label>
                 <Input
                   value={editForm.filename}
                   disabled
-                  className="rounded-sm border-[#ebebeb] h-9 text-sm opacity-60"
+                  className="rounded-sm border-border h-9 text-sm opacity-60"
                 />
-                <p className="text-xs text-[#888888]">
+                <p className="text-xs text-muted-foreground">
                   Filename cannot be changed after upload.
                 </p>
               </div>
 
               <div className="space-y-1">
-                <Label className="text-sm font-medium text-[#171717]">Alt Text <span className="text-xs text-[#888888]">(SEO)</span></Label>
+                <Label className="text-sm font-medium text-foreground">Alt Text <span className="text-xs text-muted-foreground">(SEO)</span></Label>
                 <Input
                   value={editForm.alt}
                   onChange={(e) => setEditForm({ ...editForm, alt: e.target.value })}
                   placeholder="Descriptive text for screen readers and SEO"
-                  className="rounded-sm border-[#ebebeb] h-9 text-sm"
+                  className="rounded-sm border-border h-9 text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <Label className="text-sm font-medium text-[#171717]">Title <span className="text-xs text-[#888888]">(tooltip)</span></Label>
+                <Label className="text-sm font-medium text-foreground">Title <span className="text-xs text-muted-foreground">(tooltip)</span></Label>
                 <Input
                   value={editForm.title}
                   onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
                   placeholder="Image title attribute"
-                  className="rounded-sm border-[#ebebeb] h-9 text-sm"
+                  className="rounded-sm border-border h-9 text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <Label className="text-sm font-medium text-[#171717]">Caption</Label>
+                <Label className="text-sm font-medium text-foreground">Caption</Label>
                 <Input
                   value={editForm.caption}
                   onChange={(e) => setEditForm({ ...editForm, caption: e.target.value })}
                   placeholder="Caption displayed below the image"
-                  className="rounded-sm border-[#ebebeb] h-9 text-sm"
+                  className="rounded-sm border-border h-9 text-sm"
                 />
               </div>
 
               <div className="space-y-1">
-                <Label className="text-sm font-medium text-[#171717]">Description</Label>
+                <Label className="text-sm font-medium text-foreground">Description</Label>
                 <Textarea
                   value={editForm.description}
                   onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
                   rows={2}
                   placeholder="Additional details about this image"
-                  className="rounded-sm border-[#ebebeb] text-sm"
+                  className="rounded-sm border-border text-sm"
                 />
               </div>
             </div>
@@ -455,10 +455,10 @@ export default function MediaLibraryPage() {
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogContent className="sm:max-w-sm rounded-lg">
           <DialogHeader>
-            <DialogTitle className="text-[#171717]">Delete Image</DialogTitle>
+            <DialogTitle className="text-foreground">Delete Image</DialogTitle>
           </DialogHeader>
-          <p className="text-sm text-[#888888]">
-            Are you sure you want to delete <strong className="text-[#171717]">{deleteConfirm?.filename}</strong>?
+          <p className="text-sm text-muted-foreground">
+            Are you sure you want to delete <strong className="text-foreground">{deleteConfirm?.filename}</strong>?
             This will remove the file from disk and cannot be undone.
           </p>
           <DialogFooter className="flex gap-2">
