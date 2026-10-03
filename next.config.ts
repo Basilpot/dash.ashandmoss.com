@@ -1,15 +1,9 @@
-import path from "node:path";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // @repo/ui ships raw TSX; without this Next treats it as an external package
   // and fails to compile it.
   transpilePackages: ["@repo/ui"],
-  turbopack: {
-    // OpenNext sets outputFileTracingRoot to the app dir during its build and
-    // Next rejects the build unless turbopack.root matches it exactly.
-    root: import.meta.dirname,
-  },
   images: {
     remotePatterns: [
       {
