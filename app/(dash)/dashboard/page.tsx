@@ -1,5 +1,5 @@
 "use client";
-import { StatCard } from "@/components/cards/stat-card";
+import { Stat, StatRow } from "@/components/atoms/stat";
 import { PageHeader } from "@repo/ui";
 import { Skeleton } from "@repo/ui";
 import {
@@ -61,15 +61,15 @@ export default function Dashboard() {
     return (
       <div className="space-y-6">
         <PageHeader title="Dashboard" description="Store overview" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <StatRow>
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="rounded-xl border p-6 space-y-3">
+            <div key={i} className="space-y-3 px-5 py-4 first:pl-0">
               <Skeleton className="h-4 w-20" />
               <Skeleton className="h-8 w-16" />
               <Skeleton className="h-3 w-32" />
             </div>
           ))}
-        </div>
+        </StatRow>
       </div>
     );
   }
@@ -88,82 +88,82 @@ export default function Dashboard() {
         </div>
       )}
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">Products</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <StatCard
+      <section>
+        <h2 className="mb-3 text-sm text-muted-foreground">Products</h2>
+        <StatRow>
+          <Stat
             title="Total Products"
             description="Available in catalog"
             value={stats?.totalProducts}
             icon={LucidePackage}
           />
-          <StatCard
+          <Stat
             title="Published"
             description="Live on the storefront"
             value={stats?.publishedProducts}
             icon={LucideCheckCircle2}
           />
-          <StatCard
+          <Stat
             title="Drafts"
             description="Not yet published"
             value={stats?.draftProducts}
             icon={LucideFileText}
           />
-        </div>
+        </StatRow>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">Orders</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <StatCard
+      <section>
+        <h2 className="mb-3 text-sm text-muted-foreground">Orders</h2>
+        <StatRow>
+          <Stat
             title="Total Orders"
             description="All orders"
             value={stats?.totalOrders}
             icon={LucideShoppingBag}
           />
-          <StatCard
+          <Stat
             title="Pending Payment"
             description="Awaiting customer payment"
             value={stats?.pendingOrders}
             icon={LucideClock}
           />
-          <StatCard
+          <Stat
             title="Confirmed"
             description="Paid, ready to fulfil"
             value={stats?.confirmedOrders}
             icon={LucideCircleCheck}
           />
-          <StatCard
+          <Stat
             title="Completed"
             description="Delivered & closed"
             value={stats?.completedOrders}
             icon={LucideCircleCheck}
           />
-          <StatCard
+          <Stat
             title="Failed"
             description="Payment failed"
             value={stats?.failedOrders}
             icon={LucideCircleX}
           />
-          <StatCard
+          <Stat
             title="Cancelled"
             description="Cancelled orders"
             value={stats?.cancelledOrders}
             icon={LucideBan}
           />
-        </div>
+        </StatRow>
       </section>
 
-      <section className="space-y-3">
-        <h2 className="text-sm font-medium text-muted-foreground">Revenue</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          <StatCard
+      <section>
+        <h2 className="mb-3 text-sm text-muted-foreground">Revenue</h2>
+        <StatRow>
+          <Stat
             title="Total Revenue"
             description="Successful payments (NPR)"
             value={npr(stats?.totalRevenue)}
             icon={LucideWallet}
           />
-        </div>
+        </StatRow>
       </section>
     </div>
   );
