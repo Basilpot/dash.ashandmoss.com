@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
 import "./globals.css";
-import { interTight, livvic } from "@/lib/font";
+import { interTight } from "@/lib/font";
 
 export const metadata: Metadata = {
   title: "Ash & Moss — Admin",
@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={livvic.className}>
-      <body className={`${livvic.variable} ${interTight.variable} antialiased`}>
+    <html lang="en" className={interTight.className}>
+      <body className={`${interTight.variable} antialiased`}>
         {children}
       </body>
     </html>
