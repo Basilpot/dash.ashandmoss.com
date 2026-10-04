@@ -45,3 +45,9 @@ next-env.d.ts
 
 # playwright mcp
 .playwright-mcp
+
+# .env.production is committed on purpose: it holds the API hostname the
+# production build inlines, which is a public value, not a secret. Without it a
+# fresh clone builds against http://localhost:3000 and the deployed dashboard
+# quietly talks to nothing. Real secrets stay in `wrangler secret put`.
+!.env.production

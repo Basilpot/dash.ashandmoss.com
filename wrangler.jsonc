@@ -1,6 +1,6 @@
 {
   // Furniture (ecom) admin dashboard — Next.js via OpenNext on Workers
-  "name": "ecom-dash",
+  "name": "store-basilpot-com",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-14",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,6 +8,6 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "routes": [{ "pattern": "dash.basilpot.com", "custom_domain": true }],
+  "routes": [{ "pattern": "store.basilpot.com", "custom_domain": true }],
   "observability": { "enabled": true }
 }
