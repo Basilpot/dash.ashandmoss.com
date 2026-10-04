@@ -1,4 +1,6 @@
+import { NEXT_PUBLIC_WEBSITE_DOMAIN } from "./env";
+
 export const siteConfig = {
-  name: process.env.NEXT_PUBLIC_WEBSITE_DOMAIN!,
-  domain: process.env.NEXT_PUBLIC_WEBSITE_DOMAIN!,
+  name: NEXT_PUBLIC_WEBSITE_DOMAIN,
+  domain: NEXT_PUBLIC_WEBSITE_DOMAIN,
 };

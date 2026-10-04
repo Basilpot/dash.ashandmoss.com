@@ -5,6 +5,8 @@ import { SidebarProvider, SidebarInset } from "@repo/ui";
 import { Toaster } from "sonner";
 import { redirect } from "next/navigation";
 
+import { API_BASE_URL, DEFAULT_STORE_SLUG } from "@/lib/env";
+
 const FALLBACK_NAME = "Store";
 
 const AdminDashboardLayout = async ({
@@ -22,11 +24,11 @@ const AdminDashboardLayout = async ({
   }
 
   const apiBase =
-    process.env.API_BASE_URL ?? "http://localhost:3000/api/v1";
+    API_BASE_URL;
   const meRes = await fetch(`${apiBase}/admin/me`, {
     headers: {
       Cookie: cookieStore.toString(),
-      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ashandmoss" }),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": DEFAULT_STORE_SLUG }),
     },
     cache: "no-store",
   });
@@ -45,7 +47,7 @@ const AdminDashboardLayout = async ({
   try {
     const tenantHeaders = {
       Cookie: cookieStore.toString(),
-      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": process.env.DEFAULT_STORE_SLUG ?? "ashandmoss" }),
+      ...(storeId ? { "X-Store-Id": storeId } : { "X-Store-Slug": DEFAULT_STORE_SLUG }),
     };
     const configRes = await fetch(`${apiBase}/site-config`, { headers: tenantHeaders, cache: "no-store" });
     if (configRes.ok) {

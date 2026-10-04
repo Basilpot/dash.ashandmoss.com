@@ -1,7 +1,9 @@
 import { cookies } from "next/headers";
 import type { NextRequest } from "next/server";
 
-const API = (process.env.API_BASE_URL ?? "http://localhost:3000/api/v1").replace(/\/$/, "");
+import { API_BASE_URL, DEFAULT_STORE_SLUG } from "@/lib/env";
+
+const API = API_BASE_URL;
 
 async function proxy(request: NextRequest, context: { params: Promise<{ path: string[] }> }) {
   const { path } = await context.params;
@@ -12,7 +14,7 @@ async function proxy(request: NextRequest, context: { params: Promise<{ path: st
 
   const storeId = cookieStore.get("store_id")?.value;
   if (storeId) headers.set("X-Store-Id", storeId);
-  else headers.set("X-Store-Slug", process.env.DEFAULT_STORE_SLUG ?? "ashandmoss");
+  else headers.set("X-Store-Slug", DEFAULT_STORE_SLUG);
 
   const url = new URL(`${API}/${path.join("/")}`);
   url.search = request.nextUrl.search;

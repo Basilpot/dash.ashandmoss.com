@@ -1,5 +1,7 @@
 import type { NextConfig } from "next";
 
+import { NEXT_PUBLIC_IMAGE_DOMAIN, NEXT_PUBLIC_WEBSITE_DOMAIN } from "./lib/env";
+
 const nextConfig: NextConfig = {
   // @repo/ui ships raw TSX; without this Next treats it as an external package
   // and fails to compile it.
@@ -19,12 +21,12 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_IMAGE_DOMAIN!,
+        hostname: NEXT_PUBLIC_IMAGE_DOMAIN,
         pathname: "/**",
       },
       {
         protocol: "https",
-        hostname: process.env.NEXT_PUBLIC_WEBSITE_DOMAIN!,
+        hostname: NEXT_PUBLIC_WEBSITE_DOMAIN,
         pathname: "/**",
       },
       {

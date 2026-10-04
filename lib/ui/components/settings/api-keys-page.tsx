@@ -32,8 +32,10 @@ import {
   type ApiKeyScope,
 } from "../../lib/api-keys";
 
-// Each dashboard talks to a different API now, so the copy-paste example has to
-// come from that dashboard's own env rather than a host baked into this file.
+// Read straight from process.env rather than via the app's lib/env module: that
+// module validates server-side config at import time and throws, which would take
+// this client component down with it. NEXT_PUBLIC_* has to stay a literal
+// expression anyway so Next can inline it at build.
 const apiBase = process.env.NEXT_PUBLIC_API_BASE ?? "";
 
 const SCOPES: { value: ApiKeyScope; label: string; help: string }[] = [
@@ -295,13 +297,15 @@ function CreateKeySheet({
                   </Button>
                 </div>
               </div>
-              <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Send it as a bearer token:</p>
-                <code className="block overflow-x-auto rounded-md bg-muted p-3 font-mono text-xs">
-                  curl -H &quot;Authorization: Bearer {secret.slice(0, 12)}…&quot;{" "}
-                  {apiBase}/products
-                </code>
-              </div>
+              {apiBase ? (
+                <div className="space-y-2">
+                  <p className="text-sm text-muted-foreground">Send it as a bearer token:</p>
+                  <code className="block overflow-x-auto rounded-md bg-muted p-3 font-mono text-xs">
+                    curl -H &quot;Authorization: Bearer {secret.slice(0, 12)}…&quot;{" "}
+                    {apiBase}/products
+                  </code>
+                </div>
+              ) : null}
             </>
           ) : (
             <>

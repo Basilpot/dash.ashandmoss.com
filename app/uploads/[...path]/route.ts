@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { API_BASE_URL } from "@/lib/env";
 
 export async function GET(request: NextRequest, context: any) {
   try {
@@ -6,7 +7,7 @@ export async function GET(request: NextRequest, context: any) {
     const parts: string[] = (resolvedParams?.path as string[]) || [];
     const filename = parts.join("/");
 
-    const apiBase = (process.env.API_BASE_URL || "http://localhost:3000/api/v1").replace(/\/+$/, "");
+    const apiBase = API_BASE_URL;
     const fileUrl = `${apiBase}/uploads/${encodeURIComponent(filename)}`;
 
     const resp = await fetch(fileUrl);
