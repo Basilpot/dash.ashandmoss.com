@@ -68,7 +68,8 @@ const AdminDashboardLayout = async ({
     >
       <AppSidebar
         user={{ name: admin.username, email: admin.email }}
-        storeName={companyName ?? FALLBACK_NAME}
+        currentStore={me?.store ?? { id: "", name: FALLBACK_NAME, slug: "" }}
+        stores={me?.stores ?? []}
       />
       <SidebarInset className="min-h-screen flex flex-col">
         <SiteHeader />

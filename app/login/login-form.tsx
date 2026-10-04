@@ -37,7 +37,10 @@ export function LoginForm({
           method: "POST",
           credentials: "include",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+    // This dashboard only serves furniture stores. Saying so at login stops a
+      // restaurant owner being handed their restaurant store, whose menu items would then
+      // appear under this dashboard's /products.
+      body: JSON.stringify({ ...data, businessType: "furniture" }),
           cache: "no-store",
         },
       );
@@ -58,7 +61,9 @@ export function LoginForm({
         await fetch("/api/store-selection", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ storeId: data?.stores?.[0]?.id }),
+          // Use the store the API validated rather than picking out of the array
+          // ourselves - order is not something the client should be guessing at.
+          body: JSON.stringify({ storeId: data?.store?.id ?? data?.stores?.[0]?.id }),
         });
         router.push("/dashboard");
       } else {
