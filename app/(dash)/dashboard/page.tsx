@@ -1,6 +1,5 @@
 "use client";
-import { Stat, StatRow } from "@/components/atoms/stat";
-import { PageHeader } from "@repo/ui";
+import { PageHeader, Stat, StatRow } from "@repo/ui";
 import { Skeleton } from "@repo/ui";
 import {
   LucidePackage,
