@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint",
     "build:worker": "opennextjs-cloudflare build",
-    "deploy": "opennextjs-cloudflare deploy",
+    "deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "preview": "opennextjs-cloudflare preview"
   },
   "dependencies": {
