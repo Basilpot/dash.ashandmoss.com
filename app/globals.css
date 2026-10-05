@@ -1,6 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "@repo/ui/styles/tiptap.css";
+@import "../lib/ui/styles/tiptap.css";
 
 /* Tailwind v4 auto-detects sources by walking UP from this file, so it never
    sees packages/ui/src and would render shared components completely unstyled
