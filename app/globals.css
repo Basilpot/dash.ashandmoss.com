@@ -10,6 +10,7 @@
 
 @theme inline {
     --font-sans: var(--font-sans);
+    --font-heading: var(--font-heading);
     --font-mono: var(--font-mono);
     --color-background: var(--background);
     --color-foreground: var(--foreground);
@@ -88,12 +89,14 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* Livvic, loaded by next/font (lib/font.ts). The platform stack stays behind
-     it so a failed font request degrades to the OS font instead of a blank text
-     node. */
+  /* Livvic for the body, Inter for headings and titles (lib/font.ts). The
+     platform stack stays behind both so a failed font request degrades to the OS
+     font instead of a blank text node. */
   --font-sans: var(--font-livvic), -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
+  --font-heading: var(--font-inter), var(--font-livvic), -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 
   /* Greys are cool blue-tinted rather than neutral. Warm neutral greys read
      flat next to white; these carry a trace of blue and stay calm. */
@@ -147,13 +150,16 @@
     html {
         @apply font-sans;
     }
-    /* Headings and titles are bold. The rest of the hierarchy still comes from
-       size and space, so 700 with negative tracking reads as a name rather than
-       as shouting — Livvic is a wide face, hence the tracking pull. */
+    /* Headings and titles are Inter at 700; the body stays Livvic. The rest of
+       the hierarchy comes from size and space, so 700 with a little negative
+       tracking reads as a name rather than as shouting. */
     h1,
     h2,
     h3,
-    h4 {
+    h4,
+    h5,
+    h6 {
+        font-family: var(--font-heading);
         font-weight: 700;
         letter-spacing: -0.02em;
     }

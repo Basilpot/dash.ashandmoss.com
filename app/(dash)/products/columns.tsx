@@ -80,13 +80,17 @@ export function createColumns(
     accessorKey: "title",
     header: "Title",
     cell: ({ row }) => {
+      // The title is the quick edit. The row menu still holds the full editor.
+      // (It used to append "..." to a title of any length, including short
+      // ones that fit — the truncation is CSS now.)
       return (
-        <Link
-          href={`/products/edit?id=${row.original.id}`}
-          className="underline underline-offset-2"
+        <button
+          type="button"
+          onClick={() => onQuickEdit?.(row.original.id)}
+          className="max-w-[25ch] truncate text-left align-bottom font-medium hover:underline underline-offset-2"
         >
-          {row.original.title.substring(0, 25) + "..."}
-        </Link>
+          {row.original.title}
+        </button>
       );
     },
   },

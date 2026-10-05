@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import type { Metadata } from "next";
-import { livvic } from "@/lib/font";
+import { inter, livvic } from "@/lib/font";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={livvic.variable}>
+    <html lang="en" className={`${inter.variable} ${livvic.variable}`}>
       <body className="antialiased">{children}</body>
     </html>
   );
