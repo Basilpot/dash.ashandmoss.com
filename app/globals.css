@@ -5,7 +5,6 @@
 /* Tailwind v4 auto-detects sources by walking UP from this file, so it never
    sees packages/ui/src and would render shared components completely unstyled
    with no build error. This must stay in sync with the package's location. */
-@source "../../packages/ui/src";
 
 @custom-variant dark (&:is(.dark *));
 

@@ -2,31 +2,36 @@
 
 Next.js 16 App Router, React 19, Tailwind CSS 4, TypeScript, shadcn/ui (new-york, `@/*` → package root).
 
-## Workspace
+## `@repo/ui`
 
-This app is a member of the pnpm workspace at the repo root. Shared components
-live in `@repo/ui` (`packages/ui`) and are imported by name, not via `@/`.
+Shared components are **vendored into `lib/ui`**, not installed from a package
+registry or linked from a sibling checkout. `@repo/ui` resolves to
+`lib/ui/index.ts` via the tsconfig path mapping, so components import by name
+rather than `@/`. This repository builds and deploys with nothing checked out
+beside it.
 
 Two constraints that fail *silently* — check both before concluding a change works:
 
-- **Tailwind cannot see the package.** v4 auto-detects sources by walking up from
-  `app/globals.css`, so `app/globals.css` must keep its
-  `@source "../../packages/ui/src"`. Without it, shared components render
-  completely unstyled and the build still passes. Verify by checking a
-  package-only class appears in the emitted CSS, not that the build is green.
-- **`next.config.ts` needs `transpilePackages: ["@repo/ui"]`** and an explicit
-  `turbopack.root`. The repo root has a stray `dashboard/package-lock.json`
-  alongside the root `pnpm-lock.yaml`; without `turbopack.root`, Turbopack picks
-  the wrong workspace root and `next/font/google` fails to resolve.
+- **Tailwind picks up `lib/ui` on its own.** v4 scans from the project root, so
+  the vendored copy is covered with no `@source` line. If a shared component ever
+  renders completely unstyled while the build stays green, that assumption broke —
+  verify by checking a `lib/ui`-only utility (`animate-in`, `fade-in-0`) appears in
+  the emitted CSS, not by whether the build passed.
+- **`next.config.ts` needs `transpilePackages: ["@repo/ui"]`**, since `lib/ui`
+  ships raw TSX and would otherwise be treated as an external package.
 
-`shadcn add` writes new primitives here, but 9 stock ones (`accordion`,
-`alert-dialog`, `breadcrumb`, `card`, `checkbox`, `field`, `scroll-area`,
-`switch`, `tabs`) still live in `components/ui/` because no shared component
+CSS is the exception to the alias: `globals.css` cannot use `@repo/ui/styles/...`
+because a CSS import is not a TypeScript import and does not go through the
+tsconfig mapping. It uses a relative path.
+
+`shadcn add` writes new primitives to `components/ui/`, but 9 stock ones
+(`accordion`, `alert-dialog`, `breadcrumb`, `card`, `checkbox`, `field`,
+`scroll-area`, `switch`, `tabs`) still live there because no shared component
 uses them. **If a shared component starts using a local primitive, that file must
-move into `packages/ui` too** — a package cannot import from its consumer.
+move into `lib/ui` too** — vendored code cannot import from its consumer.
 
 ```sh
-pnpm dev              # next dev (localhost:3001 in this stack)
+pnpm dev              # next dev
 pnpm build            # next build
 pnpm lint             # eslint (next/core-web-vitals + typescript); no-explicit-any is warn
 ```
@@ -37,5 +42,5 @@ pnpm lint             # eslint (next/core-web-vitals + typescript); no-explicit-
 - Sidebar menu is `components/app-sidebar.tsx` (`navGroups`, `QUICK_ACTIONS`, `SECONDARY_NAV`) — add new pages there.
 - API client pattern: plain functions in `app/actions/index.ts`.
 - `/team` = marketing team members CRUD, NOT staff accounts. There is no billing/plans page yet (SaaS feature pending).
-- Design system is the **global `frontend-design` skill** (`~/.config/opencode/skills/frontend-design/`), which takes precedence over anything in this repo. `DESIGN.md` is only a pointer to it — read real values out of `app/globals.css`, `lib/font.ts` and `app/(dash)/layout.tsx`.
+- Design system is the **global `frontend-design` skill** (`~/.config/opencode/skills/frontend-design/`), which takes precedence over anything in this repo. Read real values out of `app/globals.css`, `lib/font.ts` and `app/(dash)/layout.tsx`.
 - MCP: `next-devtools` via `.mcp.json`.
