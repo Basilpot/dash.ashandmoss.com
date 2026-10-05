@@ -84,7 +84,7 @@ export default function Tags() {
       });
 
       if (!res.ok) throw new Error();
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
 
       setTags(data?.data?.tags ?? []);
       setPagination(data?.data?.pagination);
@@ -237,7 +237,7 @@ export default function Tags() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Tags">
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
             Add New Tag

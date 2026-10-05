@@ -77,7 +77,7 @@ export default function RedirectsManager() {
   const fetchRedirects = async () => {
     try {
       const res = await fetch(API_BASE);
-      const json = await res.json();
+      const json = await res.json().catch(() => null);
       setRedirects(json.data ?? []);
     } finally {
       setLoading(false);
@@ -228,7 +228,7 @@ export default function RedirectsManager() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Redirects">
           <Button size="lg" onClick={openCreate}>
             <Plus className="mr-1" size={16} />
             Add Redirect

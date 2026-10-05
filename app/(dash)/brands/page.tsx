@@ -69,7 +69,7 @@ export default function Brands() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       setBrands(data?.brands ?? []);
     } catch {
       toast.error("Failed to load brands");
@@ -218,7 +218,7 @@ export default function Brands() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Brands">
           <Button size={"lg"} onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
             Add New Brand

@@ -62,9 +62,9 @@ export default function PaymentList() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      const data = await res.json();
-      setPayments(data.data.payments);
-      setPagination(data.data.pagination);
+      const data = await res.json().catch(() => null);
+      setPayments(data?.data?.payments ?? []);
+      setPagination(data?.data?.pagination);
     } catch {
       toast.error("Failed to load payments");
     } finally {
@@ -189,8 +189,7 @@ export default function PaymentList() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader
-        />
+        <PageHeader title="Payments" />
       </div>
 
       <DataTable

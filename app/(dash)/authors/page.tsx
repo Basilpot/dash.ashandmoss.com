@@ -87,7 +87,7 @@ export default function Authors() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      const json = await res.json();
+      const json = await res.json().catch(() => null);
       setAuthors(json?.data ?? []);
       setPagination(json?.pagination);
     } catch {
@@ -262,7 +262,7 @@ export default function Authors() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Authors">
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
             Add New Author

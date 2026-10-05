@@ -184,7 +184,7 @@ export default function MediaLibraryPage() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Media Library">
           <div className="flex gap-2">
             <input
               ref={fileInputRef}

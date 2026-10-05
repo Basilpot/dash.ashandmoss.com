@@ -119,7 +119,7 @@ export default function Products() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader>
+        <PageHeader title="All Products">
           <Link href="/products/edit/">
             <Button size="lg">
               <PlusIcon /> Add New Product

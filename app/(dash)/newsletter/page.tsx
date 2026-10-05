@@ -98,7 +98,7 @@ export default function NewsletterPage() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader>
+        <PageHeader title="Newsletter Subscribers">
           <Button size="lg" variant="secondary" onClick={() => setAddOpen(true)}>
             <LucideUserPlus className="mr-2 h-4 w-4" />
             Add

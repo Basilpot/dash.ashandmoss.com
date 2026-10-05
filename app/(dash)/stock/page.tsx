@@ -77,8 +77,8 @@ export default function StockPage() {
         cache: "no-store",
       });
       if (!res.ok) throw new Error("Failed to fetch products");
-      const data = await res.json();
-      const mapped: StockProduct[] = (data.products ?? []).map((p: any) => ({
+      const data = await res.json().catch(() => null);
+      const mapped: StockProduct[] = (data?.products ?? []).map((p: any) => ({
         id: String(p.id),
         title: p.title,
         slug: p.slug,
@@ -266,7 +266,7 @@ export default function StockPage() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader>
+        <PageHeader title="Stock & Inventory">
           <Button type="button" variant="outline" onClick={load} disabled={loading}>
             <RefreshCcw className={cn("size-4", loading && "animate-spin")} />
             Refresh

@@ -59,6 +59,7 @@ export default function Dashboard() {
   if (loading) {
     return (
       <div className="space-y-6">
+        <PageHeader title="Dashboard" />
         <StatRow>
           {[1, 2, 3, 4, 5, 6].map((i) => (
             <div key={i} className="space-y-3 py-1">
@@ -74,6 +75,8 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6">
+      <PageHeader title="Dashboard" />
+
       {error && (
         <div className="flex items-center gap-2 rounded-lg border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm text-destructive">
           <AlertCircle className="h-4 w-4" />

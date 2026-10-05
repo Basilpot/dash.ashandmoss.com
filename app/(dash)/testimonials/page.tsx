@@ -84,9 +84,9 @@ export default function Testimonials() {
       );
 
       if (!res.ok) throw new Error();
-      const data = await res.json();
-      setTestimonials(data.data);
-      setPagination(data.pagination);
+      const data = await res.json().catch(() => null);
+      setTestimonials(data?.data ?? []);
+      setPagination(data?.pagination);
     } catch {
       toast.error("Failed to load testimonials");
     } finally {
@@ -259,7 +259,7 @@ export default function Testimonials() {
       {/* Header */}
       <div className="mb-6">
         <PageHeader
-        >
+        title="Testimonials">
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
             Add New Testimonial

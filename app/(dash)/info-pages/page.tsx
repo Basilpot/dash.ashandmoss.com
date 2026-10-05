@@ -101,8 +101,7 @@ export default function InfoPages() {
     <div>
       <div className="flex flex-col pb-4">
         <div className="flex justify-between items-center">
-          <PageHeader
-          />
+          <PageHeader title="Info Pages" />
           <Link href={"/info-pages/edit"}>
             <Button size={"lg"}>
               <Plus /> Create New

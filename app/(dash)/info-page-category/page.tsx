@@ -88,7 +88,7 @@ export default function InfoPageCategories() {
         },
       );
       if (!res.ok) throw new Error();
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       setCategories(data?.categories ?? []);
       setPagination(data?.pagination ?? undefined);
     } catch {
@@ -257,7 +257,7 @@ export default function InfoPageCategories() {
     <div className="space-y-6">
       <div className="mb-6">
         <PageHeader
-        >
+        title="Content Categories">
           <Button size="lg" onClick={openCreate}>
             <Plus className="h-4 w-4 mr-1" /> Create New
           </Button>

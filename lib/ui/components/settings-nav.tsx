@@ -56,11 +56,11 @@ export const SETTINGS_TABS: SettingsTab[] = [
 ];
 
 /**
- * The settings chrome: the tab bar, then the page.
+ * The settings chrome: the tab's name, then the tab bar, then the page.
  *
- * No heading above it. The active tab is underlined and the browser tab is
- * named, so a title and a sentence describing the tab were saying it twice —
- * and on a page reached from a dropdown, a third time.
+ * The name comes from the active tab, so a page cannot drift out of sync with
+ * its own tab label. The sentence that used to sit under it is gone — it
+ * described the tab you had just clicked.
  */
 export function SettingsShell({
   tabs = SETTINGS_TABS,
@@ -70,9 +70,12 @@ export function SettingsShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const active = tabs.find((tab) => pathname === tab.href) ?? tabs[0];
 
   return (
     <>
+      <h1 className="mb-6 text-2xl tracking-tight">{active?.title}</h1>
+
       <nav
         aria-label="Settings sections"
         className="mb-8 -mb-px flex gap-1 overflow-x-auto border-b border-border"

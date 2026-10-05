@@ -1,24 +1,27 @@
 import * as React from "react";
 
 /**
- * The action row at the top of a page.
+ * The page's name on the left, its actions on the right.
  *
- * There is no heading here. Every screen used to print its own name and a
- * sentence about it, which said the same thing the tab, the sidebar and the URL
- * already said. The name is still in `<title>`, and the row stays because it
- * holds the page's actions — which now sit on the right, where a `justify-
- * between` used to push them once the left-hand side of that row was empty.
+ * The description line under the title is gone: every one of them restated the
+ * page in a full sentence ("Manage your store inventory", "Track and update
+ * product and variant stock") and none of them told you anything the screen
+ * does not already show. The name stays because it is the one thing the tab,
+ * the URL and the sidebar all agree on.
  */
 export function PageHeader({
+  title,
   children,
 }: {
-  title?: string;
-  description?: string;
+  title: string;
   children?: React.ReactNode;
 }) {
-  if (!children) return null;
-
   return (
-    <div className="flex flex-wrap items-center justify-end gap-2">{children}</div>
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <h1 className="text-2xl tracking-tight">{title}</h1>
+      {children ? (
+        <div className="flex flex-wrap items-center gap-2">{children}</div>
+      ) : null}
+    </div>
   );
 }

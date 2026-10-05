@@ -111,8 +111,7 @@ export default function Blogs() {
     <div>
       <div className="flex flex-col pb-4">
         <div className="flex justify-between items-center">
-          <PageHeader
-          />
+          <PageHeader title="Posts" />
           <Link href={"/posts/edit"}>
             <Button size={"lg"}>
               <Plus /> Create New

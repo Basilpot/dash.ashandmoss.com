@@ -103,9 +103,9 @@ export default function OrderList() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      const data = await res.json();
-      setOrders(data.data.orders);
-      setPagination(data.data.pagination);
+      const data = await res.json().catch(() => null);
+      setOrders(data?.data?.orders ?? []);
+      setPagination(data?.data?.pagination);
     } catch {
       toast.error("Failed to load orders");
     } finally {
@@ -265,8 +265,7 @@ export default function OrderList() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader
-        />
+        <PageHeader title="Orders" />
       </div>
 
       <Tabs

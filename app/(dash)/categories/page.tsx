@@ -93,7 +93,7 @@ export default function Categories() {
         credentials: "include",
       });
       if (!res.ok) throw new Error();
-      const data = await res.json();
+      const data = await res.json().catch(() => null);
       setCategories(data?.categories ?? []);
     } catch {
       toast.error("Failed to load categories");
@@ -258,7 +258,7 @@ export default function Categories() {
     <div>
       <div className="mb-6">
         <PageHeader
-        >
+        title="Categories">
           <Button size={"lg"} onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
             Add New Category
