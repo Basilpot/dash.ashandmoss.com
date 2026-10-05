@@ -266,8 +266,6 @@ export default function OrderList() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Orders"
-          description="All customer orders"
         />
       </div>
 
@@ -434,7 +432,7 @@ export default function OrderList() {
           )}
           </div>
 
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             {selectedOrder?.status === "CONFIRMED" && (
               <Button
                 variant="secondary"

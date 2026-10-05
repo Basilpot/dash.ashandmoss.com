@@ -184,8 +184,6 @@ export default function MediaLibraryPage() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Media Library"
-          description="Upload and manage images used across the site"
         >
           <div className="flex gap-2">
             <input
@@ -436,7 +434,7 @@ export default function MediaLibraryPage() {
             </div>
           )}
           </div>
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button variant="outline" onClick={() => setEditDialogOpen(false)}>Cancel</Button>
             <Button onClick={handleSave} disabled={saving}>
               {saving ? "Saving..." : "Save"}

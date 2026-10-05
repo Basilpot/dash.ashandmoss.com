@@ -257,8 +257,6 @@ export default function InfoPageCategories() {
     <div className="space-y-6">
       <div className="mb-6">
         <PageHeader
-          title="Content Categories"
-          description="Categories shared by info pages and blog posts"
         >
           <Button size="lg" onClick={openCreate}>
             <Plus className="h-4 w-4 mr-1" /> Create New
@@ -310,7 +308,7 @@ export default function InfoPageCategories() {
               />
             </div>
           </div>
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button variant="ghost" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>

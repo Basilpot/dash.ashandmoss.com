@@ -98,10 +98,7 @@ export default function NewsletterPage() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader
-          title="Newsletter Subscribers"
-          description={`${activeCount} active / ${subscribers.length} total`}
-        >
+        <PageHeader>
           <Button size="lg" variant="secondary" onClick={() => setAddOpen(true)}>
             <LucideUserPlus className="mr-2 h-4 w-4" />
             Add
@@ -135,7 +132,7 @@ export default function NewsletterPage() {
               />
             </div>
           </div>
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button size="lg" onClick={handleAdd}>
               <LucideUserPlus className="mr-2 h-4 w-4" />
               Subscribe
@@ -172,7 +169,7 @@ export default function NewsletterPage() {
               />
             </div>
           </div>
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button size="lg" onClick={handleBlast} disabled={sending}>
               {sending ? (
                 <RefreshCw className="mr-2 h-4 w-4 animate-spin" />

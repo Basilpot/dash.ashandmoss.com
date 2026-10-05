@@ -266,7 +266,7 @@ export default function StockPage() {
   return (
     <div>
       <div className="mb-6">
-        <PageHeader title="Stock & Inventory" description="Track and update product and variant stock">
+        <PageHeader>
           <Button type="button" variant="outline" onClick={load} disabled={loading}>
             <RefreshCcw className={cn("size-4", loading && "animate-spin")} />
             Refresh

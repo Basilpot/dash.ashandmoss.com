@@ -121,7 +121,7 @@ export function EmbedDialog({
             />
           </div>
         </div>
-        <SheetFooter className="flex-row justify-end gap-2">
+        <SheetFooter>
           <Button onClick={handleInsert} disabled={!valid}>
             Insert
           </Button>

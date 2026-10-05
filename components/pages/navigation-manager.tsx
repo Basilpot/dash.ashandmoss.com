@@ -898,12 +898,6 @@ const NavigationManager = ({ footer }: { footer?: boolean }) => {
       <div className="space-y-6">
         <div className="mb-6">
           <PageHeader
-            title={footer ? "Footer" : "Navbar"}
-            description={
-              footer
-                ? "Customize your footer navigation."
-                : "Customize your header navigation."
-            }
           >
             <label
               htmlFor="auto-nav"

@@ -258,8 +258,6 @@ export default function Categories() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Categories"
-          description="Categories that organize your products"
         >
           <Button size={"lg"} onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
@@ -339,7 +337,7 @@ export default function Categories() {
                 />
               </div>
             </div>
-            <SheetFooter className="flex-row justify-end gap-2">
+            <SheetFooter>
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>

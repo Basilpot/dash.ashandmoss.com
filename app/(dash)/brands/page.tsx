@@ -218,8 +218,6 @@ export default function Brands() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Brands"
-          description="Brands your products belong to"
         >
           <Button size={"lg"} onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
@@ -291,7 +289,7 @@ export default function Brands() {
               />
             </div>
             </div>
-            <SheetFooter className="flex-row justify-end gap-2">
+            <SheetFooter>
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>

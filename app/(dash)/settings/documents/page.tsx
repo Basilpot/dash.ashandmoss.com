@@ -10,7 +10,6 @@ import {
   RemoveBtn,
   SaveBar,
   Section,
-  SettingsHeader,
   useSiteConfig,
   useUpload,
   type SiteConfig,

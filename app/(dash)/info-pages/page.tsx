@@ -102,8 +102,6 @@ export default function InfoPages() {
       <div className="flex flex-col pb-4">
         <div className="flex justify-between items-center">
           <PageHeader
-            title="Info Pages"
-            description="Static pages like about and contact"
           />
           <Link href={"/info-pages/edit"}>
             <Button size={"lg"}>

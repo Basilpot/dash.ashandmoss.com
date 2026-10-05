@@ -164,7 +164,7 @@ export function CropDialog({ open, onOpenChange, media, onCropComplete }: CropDi
         <div className="space-y-3 pt-3">
           <div className="space-y-1">
             <div className="flex items-center justify-between">
-              <Label className="text-xs text-muted-foreground">Zoom</Label>
+              <Label className="text-sm text-muted-foreground">Zoom</Label>
               <span className="text-xs text-muted-foreground">{zoom.toFixed(1)}x</span>
             </div>
             <input
@@ -179,7 +179,7 @@ export function CropDialog({ open, onOpenChange, media, onCropComplete }: CropDi
           </div>
 
           <div className="space-y-1">
-            <Label className="text-xs text-muted-foreground">Aspect Ratio</Label>
+            <Label className="text-sm text-muted-foreground">Aspect Ratio</Label>
             <Select value={aspectLabel} onValueChange={handleAspectChange}>
               <SelectTrigger className="w-28 rounded-sm border-border">
                 <SelectValue />

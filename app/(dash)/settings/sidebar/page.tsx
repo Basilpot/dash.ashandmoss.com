@@ -6,7 +6,6 @@ import { Button } from "@repo/ui";
 import { Checkbox } from "@/components/ui/checkbox";
 import { navGroups } from "@/components/app-sidebar";
 import { useSidebarStore } from "@repo/ui";
-import { SettingsHeader } from "@repo/ui";
 
 const SIDEBAR_MENU_API = `/api/sidebar-menu`;
 

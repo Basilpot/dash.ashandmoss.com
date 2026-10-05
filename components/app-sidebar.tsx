@@ -8,7 +8,6 @@ import { Check, ChevronsUpDown, LucideBadgeCheck, LucideBoxes, LucideContact2, L
 
 import { NavMain } from "@repo/ui"
 import { NavSecondary } from "@repo/ui"
-import { SETTINGS_TABS } from "@repo/ui"
 import {
   Sidebar,
   SidebarContent,
@@ -191,27 +190,18 @@ export function AppSidebar({
         <NavMain items={navMain} />
         <NavSecondary items={SECONDARY_NAV} className="mt-auto" />
       </SidebarContent>
-      {/* Settings at the foot of the sidebar, out of the navigation flow: the
-          seven tabs are an account's configuration, not somewhere to browse to,
-          so they live behind one trigger instead of eight rows. */}
+      {/* Settings at the foot of the sidebar, out of the navigation flow: it is
+          where you configure the store, not somewhere to browse to. It links
+          straight to the first tab — the rest are one click along the tab bar. */}
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <LucideSettings />
-                  Settings
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent side="right" align="end" className="w-52">
-                {SETTINGS_TABS.map((tab) => (
-                  <DropdownMenuItem key={tab.href} asChild>
-                    <Link href={tab.href}>{tab.title}</Link>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+            <SidebarMenuButton asChild>
+              <Link href="/settings/brand">
+                <LucideSettings />
+                Settings
+              </Link>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>

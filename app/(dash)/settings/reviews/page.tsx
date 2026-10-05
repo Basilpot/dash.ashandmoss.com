@@ -7,7 +7,6 @@ import {
   FormSkeleton,
   SaveBar,
   Section,
-  SettingsHeader,
   useSiteConfig,
   type SiteConfig,
 } from "@repo/ui";

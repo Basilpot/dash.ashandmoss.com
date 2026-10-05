@@ -228,8 +228,6 @@ export default function RedirectsManager() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Redirects"
-          description="Add or update URL redirects. Redirects are automatically applied when a page or activity slug is changed. If something needs manual intervention that can be changed manually here."
         >
           <Button size="lg" onClick={openCreate}>
             <Plus className="mr-1" size={16} />
@@ -272,7 +270,7 @@ export default function RedirectsManager() {
               />
             </div>
           </div>
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button variant="ghost" onClick={() => setDialogOpen(false)}>
               Cancel
             </Button>

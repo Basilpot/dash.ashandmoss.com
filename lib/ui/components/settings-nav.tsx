@@ -56,14 +56,11 @@ export const SETTINGS_TABS: SettingsTab[] = [
 ];
 
 /**
- * The settings chrome: heading, then the tab bar, then the page.
+ * The settings chrome: the tab bar, then the page.
  *
- * The heading sits above the tabs, not below. Rendering it inside each page put
- * the navigation above the thing it navigates, which read as a filter row
- * rather than as where you are.
- *
- * The title comes from the active tab, so a page cannot drift out of sync with
- * its own tab label.
+ * No heading above it. The active tab is underlined and the browser tab is
+ * named, so a title and a sentence describing the tab were saying it twice —
+ * and on a page reached from a dropdown, a third time.
  */
 export function SettingsShell({
   tabs = SETTINGS_TABS,
@@ -73,17 +70,9 @@ export function SettingsShell({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const active = tabs.find((tab) => pathname === tab.href) ?? tabs[0];
 
   return (
     <>
-      <div className="mb-6">
-        <h1 className="text-2xl tracking-tight">{active?.title}</h1>
-        {active?.description ? (
-          <p className="mt-1 text-sm text-muted-foreground">{active.description}</p>
-        ) : null}
-      </div>
-
       <nav
         aria-label="Settings sections"
         className="mb-8 -mb-px flex gap-1 overflow-x-auto border-b border-border"

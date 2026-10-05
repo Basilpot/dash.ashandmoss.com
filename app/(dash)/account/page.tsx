@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { Button } from "@repo/ui";
 import { Input } from "@repo/ui";
 import { Label } from "@repo/ui";
-import { Section, SettingsHeader, FormSkeleton } from "@repo/ui";
+import { FormSkeleton } from "@repo/ui";
 import { KeyRound, Loader2 } from "lucide-react";
 
 async function apiMessage(res: Response, fallback: string) {
@@ -82,40 +82,39 @@ export default function AccountPage() {
   if (!me)
     return (
       <div className="max-w-3xl">
-        <SettingsHeader title="Account" description="Manage your login details." />
         <FormSkeleton />
       </div>
     );
 
   return (
-    <div className="max-w-3xl">
-      <SettingsHeader title="Account" description="Manage your login details." />
-
-      <Section title="Profile & password">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Username</Label>
-            <Input
-              value={profile.username}
-              onChange={(e) => setProfile({ ...profile, username: e.target.value })}
-            />
-          </div>
-          <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Login email</Label>
-            <Input
-              type="email"
-              value={profile.email}
-              onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-            />
-          </div>
+    <div className="max-w-3xl space-y-8">
+      <div className="grid gap-6 sm:grid-cols-2">
+        <div className="space-y-1.5">
+          <Label className="text-sm text-muted-foreground">Username</Label>
+          <Input
+            value={profile.username}
+            onChange={(e) => setProfile({ ...profile, username: e.target.value })}
+          />
         </div>
-        <div className="rounded-lg border bg-muted/40 p-3 flex items-center gap-2 text-xs text-muted-foreground">
-          <KeyRound className="h-3.5 w-3.5 shrink-0" />
+        <div className="space-y-1.5">
+          <Label className="text-sm text-muted-foreground">Login email</Label>
+          <Input
+            type="email"
+            value={profile.email}
+            onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+          />
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+          <KeyRound className="size-4 shrink-0" aria-hidden />
           To change your password, enter your current password and a new one. Leave blank to keep it.
         </div>
-        <div className="grid grid-cols-3 gap-3">
+
+        <div className="grid gap-6 sm:grid-cols-3">
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Current password</Label>
+            <Label className="text-sm text-muted-foreground">Current password</Label>
             <Input
               type="password"
               value={profile.currentPassword}
@@ -124,7 +123,7 @@ export default function AccountPage() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">New password</Label>
+            <Label className="text-sm text-muted-foreground">New password</Label>
             <Input
               type="password"
               value={profile.newPassword}
@@ -133,7 +132,7 @@ export default function AccountPage() {
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-xs text-muted-foreground">Confirm new password</Label>
+            <Label className="text-sm text-muted-foreground">Confirm new password</Label>
             <Input
               type="password"
               value={profile.confirmPassword}
@@ -142,11 +141,12 @@ export default function AccountPage() {
             />
           </div>
         </div>
-        <Button onClick={saveProfile} disabled={busy === "profile"}>
-          {busy === "profile" && <Loader2 className="mr-1 h-4 w-4 animate-spin" />}
-          Save profile
-        </Button>
-      </Section>
+      </div>
+
+      <Button onClick={saveProfile} disabled={busy === "profile"}>
+        {busy === "profile" && <Loader2 className="mr-1 size-4 animate-spin" />}
+        Save profile
+      </Button>
     </div>
   );
 }

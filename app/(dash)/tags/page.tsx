@@ -237,8 +237,6 @@ export default function Tags() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Tags"
-          description="Curated tags that highlight products"
         >
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
@@ -304,7 +302,7 @@ export default function Tags() {
               <div className="flex items-center gap-2"><Checkbox id="tagFeatured" checked={watch("isFeatured")} onCheckedChange={(value) => setValue("isFeatured", value === true)} /><Label htmlFor="tagFeatured">Featured on storefront</Label></div>
               <div className="flex items-center gap-2"><Checkbox id="tagNav" checked={watch("isFeaturedInNav")} onCheckedChange={(value) => setValue("isFeaturedInNav", value === true)} /><Label htmlFor="tagNav">Promote to top-level navigation</Label></div>
             </div>
-            <SheetFooter className="flex-row justify-end gap-2">
+            <SheetFooter>
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>

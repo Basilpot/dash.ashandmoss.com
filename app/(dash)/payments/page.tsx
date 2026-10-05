@@ -190,8 +190,6 @@ export default function PaymentList() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Payments"
-          description="All payment transactions across your store"
         />
       </div>
 
@@ -280,7 +278,7 @@ export default function PaymentList() {
           )}
           </div>
 
-          <SheetFooter className="flex-row justify-end gap-2">
+          <SheetFooter>
             <Button onClick={() => setIsViewDialogOpen(false)}>Close</Button>
           </SheetFooter>
         </SheetContent>

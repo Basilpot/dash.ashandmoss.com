@@ -95,11 +95,16 @@ function SheetHeader({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+/**
+ * A sheet is one focused task on a phone, so its actions span the sheet rather
+ * than huddling in the bottom-right corner where a thumb has to find them. One
+ * button fills the width, two split it, three thirds it.
+ */
 function SheetFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="sheet-footer"
-      className={cn("mt-auto flex flex-col gap-2 p-4", className)}
+      className={cn("mt-auto grid auto-cols-fr grid-flow-col gap-2 p-4", className)}
       {...props}
     />
   )

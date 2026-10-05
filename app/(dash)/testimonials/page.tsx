@@ -259,8 +259,6 @@ export default function Testimonials() {
       {/* Header */}
       <div className="mb-6">
         <PageHeader
-          title="Testimonials"
-          description="Manage your testimonials here."
         >
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
@@ -332,7 +330,7 @@ export default function Testimonials() {
                 />
               </div>
             </div>
-            <SheetFooter className="flex-row justify-end gap-2">
+            <SheetFooter>
               <Button type="submit" size="lg">
                 {isEdit ? "Update" : "Add"}
               </Button>

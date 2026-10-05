@@ -206,7 +206,7 @@ export function AddMediaUrlDialog({ open, onOpenChange, onSuccess }: AddMediaUrl
           </div>
         </div>
 
-        <SheetFooter className="flex-row justify-end gap-2">
+        <SheetFooter>
           <Button variant="outline" onClick={() => { resetForm(); onOpenChange(false); }} className="rounded-full border-border">
             Cancel
           </Button>

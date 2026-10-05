@@ -380,7 +380,7 @@ function CreateKeySheet({
           )}
         </div>
 
-        <SheetFooter className="flex-row justify-end gap-2">
+        <SheetFooter>
           {secret ? (
             <Button
               onClick={() => {

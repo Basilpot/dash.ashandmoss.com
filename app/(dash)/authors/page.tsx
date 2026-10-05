@@ -262,8 +262,6 @@ export default function Authors() {
     <div>
       <div className="mb-6">
         <PageHeader
-          title="Authors"
-          description="Manage your authors here. Authors can post articles and informational contents."
         >
           <Button size="lg" onClick={openCreateDialog}>
             <LucidePlus className="mr-2" size={18} />
@@ -392,7 +390,7 @@ export default function Authors() {
                 <p className="text-sm text-red-500">{errors.email.message}</p>
               )}
             </div>
-            <SheetFooter className="flex-row justify-end gap-2">
+            <SheetFooter>
               <Button type="submit" size="lg" disabled={isSubmitting}>
                 {isEdit ? "Update" : "Add"}
               </Button>
