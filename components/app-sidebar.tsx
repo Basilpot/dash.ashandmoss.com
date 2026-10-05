@@ -2,16 +2,16 @@
 
 import { useRouter } from "next/navigation"
 
-import * as React from "react"
-import { Check, ChevronsUpDown, LucideBadgeCheck, LucideBoxes, LucideColumnsSettings, LucideContact2, LucideFolder, LucideForm, LucideGaugeCircle, LucideImage, LucideLayers, LucideNewspaper, LucidePackage, LucideReceipt, LucideRedo2, LucideSettings, LucideStars, LucideTag, LucideWallet, type LucideIcon } from "lucide-react";
+import * as React from "react";
+import Link from "next/link";
+import { Check, ChevronsUpDown, LucideBadgeCheck, LucideBoxes, LucideContact2, LucideFolder, LucideGaugeCircle, LucideImage, LucideLayers, LucideNewspaper, LucidePackage, LucideReceipt, LucideRedo2, LucideSettings, LucideStars, LucideTag, LucideWallet, type LucideIcon } from "lucide-react";
 
 import { NavMain } from "@repo/ui"
 import { NavSecondary } from "@repo/ui"
-import { NavUser } from "@repo/ui"
+import { SETTINGS_TABS } from "@repo/ui"
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -46,13 +46,6 @@ export const navGroups: {
       { title: "Redirects", url: "/redirects", icon: LucideRedo2 },
     ],
   },
-  {
-    label: "Navigation",
-    items: [
-      { title: "Navbar", url: "/navbar", icon: LucideForm },
-      { title: "Footer", url: "/footer", icon: LucideColumnsSettings },
-    ],
-  },
 ]
 
 const QUICK_ACTIONS = [
@@ -64,8 +57,8 @@ const QUICK_ACTIONS = [
   { title: "Orders", url: "/orders", icon: LucideReceipt },
   { title: "Stock", url: "/stock", icon: LucideBoxes },
   { title: "Payments", url: "/payments", icon: LucideWallet },
-  // Lands on the API tab; the rest of settings is one click away in the tab bar.
-  { title: "Settings", url: "/settings/api-keys", icon: LucideSettings },
+  // Settings is not here: it lives in the store switcher menu at the top, next
+  // to the store it configures.
 ]
 
 const SECONDARY_NAV: {
@@ -86,12 +79,10 @@ function initials(name?: string) {
 }
 
 export function AppSidebar({
-  user,
   currentStore,
   stores = [],
   ...props
 }: React.ComponentProps<typeof Sidebar> & {
-  user?: { name: string; email: string }
   currentStore?: { id: string; name: string; slug: string }
   stores?: { id: string; name: string; slug: string }[]
 }) {
@@ -190,6 +181,16 @@ export function AppSidebar({
                     {s.id === currentStore?.id ? <Check className="size-4 shrink-0" /> : null}
                   </DropdownMenuItem>
                 ))}
+                <DropdownMenuSeparator />
+                <DropdownMenuLabel className="flex items-center gap-2">
+                  <LucideSettings className="size-3.5" aria-hidden />
+                  Settings
+                </DropdownMenuLabel>
+                {SETTINGS_TABS.map((tab) => (
+                  <DropdownMenuItem key={tab.href} asChild>
+                    <Link href={tab.href}>{tab.title}</Link>
+                  </DropdownMenuItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
@@ -199,14 +200,6 @@ export function AppSidebar({
         <NavMain items={navMain} />
         <NavSecondary items={SECONDARY_NAV} className="mt-auto" />
       </SidebarContent>
-      <SidebarFooter>
-        <NavUser
-          user={{
-            name: user?.name ?? "Admin",
-            email: user?.email ?? "",
-          }}
-        />
-      </SidebarFooter>
     </Sidebar>
   )
 }

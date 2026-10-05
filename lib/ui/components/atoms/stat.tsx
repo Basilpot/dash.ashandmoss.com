@@ -2,20 +2,18 @@ import type { LucideIcon } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 /**
- * A band of figures divided by vertical rules rather than a grid of cards.
+ * A band of figures with nothing boxing any of them.
  *
- * The reference dashboards set a metric row as one continuous ruled band: a
- * horizontal rule above, one before each column, and nothing boxing any single
- * figure. The columns read as columns of a table because they are columns of a
- * table — no per-cell container, no shadow, no radius. A `gap-4` grid of bordered
- * cards fragments the same numbers into separate objects and gives the eye six
- * competing edges instead of three shared ones.
+ * The reference dashboards rule between every column. This one does not: the
+ * numbers are separated by space, and a single hairline separates one section of
+ * the page from the next. Ruling each cell turns a section into a grid of boxes
+ * — six edges competing with the one line that actually does structural work.
  *
- * The rules live on `Stat` rather than as a `[&>*]:` variant here. Tailwind v4
- * scans sources upward from app/globals.css, which does not reach dashboard/
- * components/, so an arbitrary child variant written in this file is silently
- * dropped and the band loses its dividers with no error. Plain utilities on the
- * cell itself always compile.
+ * The rules used to live on `Stat` as a `[&>*]:` variant on the row. That is
+ * gone now, but the reason to keep any layout class here on the cell itself
+ * stays true: Tailwind v4 scans sources upward from app/globals.css, which does
+ * not reach components/, so an arbitrary child variant written in this file is
+ * silently dropped with no build error.
  */
 export function StatRow({
   children,
@@ -27,7 +25,7 @@ export function StatRow({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 border-t border-border sm:grid-cols-2 lg:grid-cols-3",
+        "grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3",
         className,
       )}
     >
@@ -50,15 +48,7 @@ export function Stat({
   className?: string;
 }) {
   return (
-    <div
-      className={cn(
-        // A rule before every column, including the first — the reference
-        // aligns each column to the same left edge. Stacked, cells separate
-        // horizontally instead.
-        "border-l border-border px-5 py-4 max-sm:border-t",
-        className,
-      )}
-    >
+    <div className={cn("py-1", className)}>
       <div className="flex items-center gap-1.5">
         {Icon ? <Icon className="size-3.5 text-muted-foreground" aria-hidden /> : null}
         <p className="text-sm text-muted-foreground">{title}</p>

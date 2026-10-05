@@ -32,12 +32,19 @@ import { logout } from "../lib/logout"
 
 export function NavUser({
   user,
+  placement = "sidebar",
 }: {
   user: {
     name: string
     email: string
     avatar?: string
   }
+  /**
+   * `header` renders a trigger sized for the top bar — a fixed 32px control with
+   * no name/email column. A `SidebarMenuButton` is h-12 and w-full, which
+   * stretches to the full width of the header and doubles its height.
+   */
+  placement?: "sidebar" | "header"
 }) {
   const { isMobile } = useSidebar()
   const router = useRouter()
@@ -48,46 +55,49 @@ export function NavUser({
     .slice(0, 2)
     .toUpperCase()
 
-  return (
-    <SidebarMenu>
-      <SidebarMenuItem>
+  const avatar = (
+    <Avatar className="size-8 shrink-0 rounded-lg">
+      {user.avatar ? <AvatarImage src={user.avatar} alt={user.name} /> : null}
+      <AvatarFallback className="rounded-lg">{initials || "A"}</AvatarFallback>
+    </Avatar>
+  )
+
+  const menu = (
+    <>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                {user.avatar ? (
-                  <AvatarImage src={user.avatar} alt={user.name} />
-                ) : null}
-                <AvatarFallback className="rounded-lg">
-                  {initials || "A"}
-                </AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
-            </SidebarMenuButton>
+            {placement === "header" ? (
+              <button
+                type="button"
+                className="flex h-8 items-center gap-2 rounded-md px-2 text-sm transition-colors hover:bg-accent"
+              >
+                {avatar}
+                <span className="max-w-32 truncate font-medium">{user.name}</span>
+                <ChevronsUpDown className="size-4 shrink-0 text-muted-foreground" />
+              </button>
+            ) : (
+              <SidebarMenuButton
+                size="lg"
+                className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+              >
+                {avatar}
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-medium">{user.name}</span>
+                  <span className="truncate text-xs">{user.email}</span>
+                </div>
+                <ChevronsUpDown className="ml-auto size-4" />
+              </SidebarMenuButton>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent
             className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            side={isMobile || placement === "header" ? "bottom" : "right"}
             align="end"
             sideOffset={4}
           >
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
-                  {user.avatar ? (
-                    <AvatarImage src={user.avatar} alt={user.name} />
-                  ) : null}
-                  <AvatarFallback className="rounded-lg">
-                    {initials || "A"}
-                  </AvatarFallback>
-                </Avatar>
+                {avatar}
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">{user.name}</span>
                   <span className="truncate text-xs">{user.email}</span>
@@ -115,7 +125,16 @@ export function NavUser({
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
-      </SidebarMenuItem>
+    </>
+  )
+
+  // The sidebar wrappers are `w-full` list semantics; in the header they would
+  // claim the remaining width of the row and push the create button left.
+  if (placement === "header") return menu
+
+  return (
+    <SidebarMenu>
+      <SidebarMenuItem>{menu}</SidebarMenuItem>
     </SidebarMenu>
   )
 }

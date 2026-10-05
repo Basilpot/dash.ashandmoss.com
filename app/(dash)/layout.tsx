@@ -1,5 +1,6 @@
 import { cookies } from "next/headers";
 import { AppSidebar } from "@/components/app-sidebar";
+import { PageTitle } from "@/components/page-title";
 import { SiteHeader } from "@repo/ui";
 import { SidebarProvider, SidebarInset } from "@repo/ui";
 import { Toaster } from "sonner";
@@ -38,7 +39,10 @@ const AdminDashboardLayout = async ({
   }
 
   const me = await meRes.json();
-  const admin = me?.data?.admin;
+  // The API wraps everything in `data`; reading `me.store` here silently gave
+  // undefined, which is why the sidebar header always said "Store".
+  const meData = me?.data ?? {};
+  const admin = meData.admin;
   if (!admin) {
     redirect("/login");
   }
@@ -69,12 +73,12 @@ const AdminDashboardLayout = async ({
       }
     >
       <AppSidebar
-        user={{ name: admin.username, email: admin.email }}
-        currentStore={me?.store ?? { id: "", name: FALLBACK_NAME, slug: "" }}
-        stores={me?.stores ?? []}
+        currentStore={meData.store ?? { id: "", name: FALLBACK_NAME, slug: "" }}
+        stores={meData.stores ?? []}
       />
       <SidebarInset className="min-h-screen flex flex-col">
-        <SiteHeader />
+        <PageTitle />
+        <SiteHeader user={{ name: admin.username, email: admin.email }} />
         <div className="min-w-0 flex-1 p-4">{children}</div>
         <div className="border-t border-border">
           <div className="flex items-center justify-center px-4 py-3 text-xs text-muted-foreground">

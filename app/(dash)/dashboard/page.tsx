@@ -62,7 +62,7 @@ export default function Dashboard() {
         <PageHeader title="Dashboard" description="Store overview" />
         <StatRow>
           {[1, 2, 3, 4, 5, 6].map((i) => (
-            <div key={i} className="space-y-3 px-5 py-4 first:pl-0">
+            <div key={i} className="space-y-3 py-1">
               <Skeleton className="h-4 w-20" />
               <Skeleton className="h-8 w-16" />
               <Skeleton className="h-3 w-32" />
@@ -88,7 +88,7 @@ export default function Dashboard() {
       )}
 
       <section>
-        <h2 className="mb-3 text-sm text-muted-foreground">Products</h2>
+        <h2 className="mb-4 text-sm text-muted-foreground">Products</h2>
         <StatRow>
           <Stat
             title="Total Products"
@@ -111,8 +111,8 @@ export default function Dashboard() {
         </StatRow>
       </section>
 
-      <section>
-        <h2 className="mb-3 text-sm text-muted-foreground">Orders</h2>
+      <section className="border-t border-border pt-6">
+        <h2 className="mb-4 text-sm text-muted-foreground">Orders</h2>
         <StatRow>
           <Stat
             title="Total Orders"
@@ -153,8 +153,8 @@ export default function Dashboard() {
         </StatRow>
       </section>
 
-      <section>
-        <h2 className="mb-3 text-sm text-muted-foreground">Revenue</h2>
+      <section className="border-t border-border pt-6">
+        <h2 className="mb-4 text-sm text-muted-foreground">Revenue</h2>
         <StatRow>
           <Stat
             title="Total Revenue"

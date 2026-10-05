@@ -9,6 +9,7 @@ import {
   Tags,
   Users,
 } from "lucide-react";
+import { NavUser } from "../nav-user";
 import { SidebarTrigger } from "../ui/sidebar";
 import {
   DropdownMenu,
@@ -47,6 +48,7 @@ const CREATE_ACTIONS = [
 
 export function SiteHeader({
   actions,
+  user,
 }: {
   /**
    * Rendered immediately before the create button. A slot rather than a fixed
@@ -54,6 +56,8 @@ export function SiteHeader({
    * the restaurant one has notifications and this one has none.
    */
   actions?: React.ReactNode;
+  /** Rendered after the create button: who is signed in. */
+  user?: { name: string; email: string };
 } = {}) {
   return (
     <header className="flex h-(--header-height) shrink-0 items-center gap-2 border-b transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-(--header-height)">
@@ -83,6 +87,7 @@ export function SiteHeader({
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+        {user ? <NavUser user={user} placement="header" /> : null}
       </div>
     </header>
   );

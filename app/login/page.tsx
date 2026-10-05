@@ -1,6 +1,8 @@
 import { Toaster } from "sonner";
 import { LoginForm } from "./login-form";
 
+export const metadata = { title: "Basilpot" };
+
 /**
  * Split sign-in: the form on white at the left, a brand panel filling the right
  * half.

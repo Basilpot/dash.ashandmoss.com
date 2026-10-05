@@ -15,7 +15,6 @@ import { useProductStore, FIELD_LABELS } from "@/store/useProductStore";
 import {
   GripVertical,
   LucideEdit2,
-  LucideImage,
   Plus,
 
   Upload,
@@ -568,18 +567,10 @@ function ProductForm() {
                 <Label htmlFor="slug">Slug/URL</Label>
                 <InstructionTooltip instruction="Keep it short, in kebab-case e.g. organic-cotton-tee" />
               </div>
-              <div className="flex gap-1 items-center">
-                <Input
-                  {...register("slug")}
-                  placeholder="product-title-slug"
-                />
-                <Button
-                  type="button"
-                  onClick={() => setValue("slug", generateSlug(getValues("title")))}
-                >
-                  Generate from Title
-                </Button>
-              </div>
+              <Input
+                {...register("slug")}
+                placeholder="product-title-slug"
+              />
               {errors.slug && (
                 <p className="text-sm text-red-500">{errors?.slug?.message}</p>
               )}
@@ -860,19 +851,28 @@ function ProductForm() {
                 </div>
                 <div className="flex flex-col gap-1.5">
                   <Label>Image</Label>
+                  {/* Same tile as the gallery section: one 128px frame, the
+                      media picker behind an edit control, X to clear. */}
                   {watch(`variants.${index}.image`) ? (
-                    <div className="relative w-fit">
+                    <div className="relative size-32 overflow-hidden rounded-md border">
                       <Image
                         src={getFullImageUrl(watch(`variants.${index}.image`) ?? "")}
                         alt=""
-                        width={96}
-                        height={96}
-                        className="object-cover rounded-sm border"
+                        fill
+                        className="object-cover"
                         unoptimized
                       />
+                      <button
+                        type="button"
+                        aria-label="Remove image"
+                        onClick={() => setValue(`variants.${index}.image`, "")}
+                        className="absolute top-1 right-1 z-10 rounded-full bg-primary/90 p-1 text-background"
+                      >
+                        <X size={14} />
+                      </button>
                       <Button
                         size={"icon-sm"}
-                        className="absolute bottom-1 right-1"
+                        className="absolute bottom-1 right-1 z-10"
                         type="button"
                         onClick={() => setVariantImagePicker(index)}
                       >
@@ -883,9 +883,10 @@ function ProductForm() {
                     <button
                       type="button"
                       onClick={() => setVariantImagePicker(index)}
-                      className="size-24 bg-accent p-2 rounded-sm flex items-center justify-center cursor-pointer border-dotted border-2 hover:bg-accent/70 transition-colors"
+                      className="flex size-32 shrink-0 cursor-pointer flex-col items-center justify-center rounded-md border border-dashed text-muted-foreground transition-colors hover:bg-primary/10 hover:text-foreground"
                     >
-                      <LucideImage />
+                      <Plus className="mb-1 h-5 w-5" />
+                      <span className="text-xs font-medium">Add Media</span>
                     </button>
                   )}
                 </div>
