@@ -14,6 +14,7 @@ import {
   AlertDialogTitle,
 } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
+import { EmptyState } from "../empty-state";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import {
@@ -113,16 +114,16 @@ export function ApiKeysPage() {
       {loading ? (
         <p className="text-sm text-muted-foreground">Loading keys…</p>
       ) : keys.length === 0 ? (
-        <div className="py-16 text-center">
-          <KeyRound className="mx-auto mb-3 size-8 text-muted-foreground opacity-40" />
-          <p className="text-base">No API keys yet</p>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Create a key to connect a custom site to this store&apos;s catalogue.
-          </p>
-          <Button className="mt-6" onClick={() => setCreateOpen(true)}>
-            <Plus className="mr-2 size-4" /> Create your first key
-          </Button>
-        </div>
+        <EmptyState
+          icon={KeyRound}
+          title="No API keys yet"
+          description="Create a key to connect a custom site to this store's catalogue."
+          action={
+            <Button onClick={() => setCreateOpen(true)}>
+              <Plus className="mr-2 size-4" /> Create your first key
+            </Button>
+          }
+        />
       ) : (
         <ul className="border-t border-border">
           {keys.map((key) => (

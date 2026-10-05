@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { FileText, Plus } from "lucide-react";
 import { Button } from "@repo/ui";
+import { EmptyState } from "@repo/ui";
 import { Input } from "@repo/ui";
 import {
   FileUploadLabel,
@@ -35,6 +36,9 @@ export default function DocumentsPage() {
 
   if (loading) return <FormSkeleton />;
 
+  const addDocument = () =>
+    setDocuments((docs) => [...docs, { title: "", key: "", path: "" }]);
+
   const update = (i: number, patch: Partial<DocumentRow>) =>
     setDocuments((docs) => docs.map((d, j) => (j === i ? { ...d, ...patch } : d)));
 
@@ -46,6 +50,18 @@ export default function DocumentsPage() {
           save({ documents });
         }}
       >
+        {documents.length === 0 ? (
+          <EmptyState
+            icon={FileText}
+            title="No documents yet"
+            description="Add the brochures and policy files customers can download from the storefront."
+            action={
+              <Button type="button" onClick={addDocument}>
+                <Plus className="mr-1 size-4" /> Add your first document
+              </Button>
+            }
+          />
+        ) : (
         <Section title="Documents">
           {documents.map((doc, i) => (
             <div key={i} className="flex items-center gap-2">
@@ -79,16 +95,12 @@ export default function DocumentsPage() {
             type="button"
             variant="outline"
             size="sm"
-            onClick={() =>
-              setDocuments((docs) => [
-                ...docs,
-                { title: "", key: "", path: "" },
-              ])
-            }
+            onClick={addDocument}
           >
             <Plus className="mr-1 h-4 w-4" /> Add document
           </Button>
         </Section>
+        )}
 
         <SaveBar
           saving={saving}

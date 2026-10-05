@@ -5,27 +5,20 @@ import * as React from "react";
  *
  * There is no heading here. Every screen used to print its own name and a
  * sentence about it, which said the same thing the tab, the sidebar and the URL
- * already said. The title is still in `<title>` — that is where a name is
- * useful — and the row stays because it holds the page's actions.
+ * already said. The name is still in `<title>`, and the row stays because it
+ * holds the page's actions — which now sit on the right, where a `justify-
+ * between` used to push them once the left-hand side of that row was empty.
  */
 export function PageHeader({
-  description,
   children,
 }: {
   title?: string;
   description?: string;
   children?: React.ReactNode;
 }) {
-  if (!children && !description) return null;
+  if (!children) return null;
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      {description ? (
-        <p className="text-sm text-muted-foreground">{description}</p>
-      ) : null}
-      {children ? (
-        <div className="flex flex-wrap items-center gap-2">{children}</div>
-      ) : null}
-    </div>
+    <div className="flex flex-wrap items-center justify-end gap-2">{children}</div>
   );
 }
