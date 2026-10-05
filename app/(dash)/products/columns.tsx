@@ -43,6 +43,7 @@ export function createColumns(
   onDelete?: (id: string) => void,
   slugSort?: "asc" | "desc" | null,
   onToggleSlugSort?: () => void,
+  onQuickEdit?: (id: string) => void,
 ): ColumnDef<any>[] {
   return [
   {
@@ -260,6 +261,10 @@ export function createColumns(
               >
                   <Eye />
                   Preview
+              </DropdownMenuItem>
+              <DropdownMenuItem onClick={() => onQuickEdit?.(row.getValue("id"))}>
+                <Edit3 />
+                Quick edit
               </DropdownMenuItem>
               <DropdownMenuItem
                 onClick={() =>

@@ -1,10 +1,13 @@
-import { Inter_Tight } from "next/font/google";
+import { Livvic } from "next/font/google";
 
-// Variable weight, so the 500 headings and 400 body both come out of one file.
+// Livvic for the whole UI — body included. It is not a variable face, so the
+// weights the app actually uses are requested explicitly: 400 body, 500 the
+// `font-medium` on nav items and labels, 600 `font-semibold`, 700 headings.
 // `variable` points at a name globals.css composes into --font-sans, which keeps
-// the native stack as the fallback rather than replacing it.
-export const interTight = Inter_Tight({
+// the platform stack as the fallback rather than replacing it.
+export const livvic = Livvic({
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
-  variable: "--font-inter-tight",
+  variable: "--font-livvic",
 });

@@ -88,12 +88,12 @@
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
 
-  /* Inter Tight, loaded by next/font (lib/font.ts). The platform stack stays
-     behind it so a failed font request degrades to the OS font instead of a
-     blank text node. */
-  --font-sans: var(--font-inter-tight), -apple-system, BlinkMacSystemFont,
-    "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji",
-    "Segoe UI Emoji", "Segoe UI Symbol";
+  /* Livvic, loaded by next/font (lib/font.ts). The platform stack stays behind
+     it so a failed font request degrades to the OS font instead of a blank text
+     node. */
+  --font-sans: var(--font-livvic), -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
 
   /* Greys are cool blue-tinted rather than neutral. Warm neutral greys read
      flat next to white; these carry a trace of blue and stay calm. */
@@ -147,17 +147,17 @@
     html {
         @apply font-sans;
     }
-    /* Weight 500 with negative tracking, not 700. The heading hierarchy here
-       comes from size and space; bold weights were making every screen read
-       heavy. 500 is a real step because Inter Tight is a variable font. */
+    /* Headings and titles are bold. The rest of the hierarchy still comes from
+       size and space, so 700 with negative tracking reads as a name rather than
+       as shouting — Livvic is a wide face, hence the tracking pull. */
     h1,
     h2,
     h3,
     h4 {
-        font-weight: 500;
+        font-weight: 700;
         letter-spacing: -0.02em;
     }
     h1 {
-        letter-spacing: -0.03em;
+        letter-spacing: -0.025em;
     }
 }

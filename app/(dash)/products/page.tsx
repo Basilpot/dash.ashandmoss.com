@@ -6,8 +6,8 @@ import { PageHeader } from "@repo/ui";
 import { DataTable } from "@repo/ui";
 import { PlusIcon } from "lucide-react";
 import { createColumns } from "./columns";
+import { ProductSheet } from "@/components/product/product-sheet";
 import { Button } from "@repo/ui";
-import Link from "next/link";
 import { ProductFilters, STATUS_PARAM, STATUS_TABS } from "./product-filters";
 
 type StatusTab = (typeof STATUS_TABS)[number];
@@ -17,6 +17,15 @@ export default function Products() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [pagination, setPagination] = useState<any>();
+  // null = create, a product id = edit. The sheet is mounted once, so opening a
+  // different product remounts the form through ProductSheet's `key`.
+  const [sheetProductId, setSheetProductId] = useState<string | null>(null);
+  const [sheetOpen, setSheetOpen] = useState(false);
+
+  const openSheet = (id: string | null) => {
+    setSheetProductId(id);
+    setSheetOpen(true);
+  };
 
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -120,11 +129,9 @@ export default function Products() {
     <div>
       <div className="mb-6">
         <PageHeader title="All Products">
-          <Link href="/products/edit/">
-            <Button size="lg">
-              <PlusIcon /> Add New Product
-            </Button>
-          </Link>
+          <Button size="lg" onClick={() => openSheet(null)}>
+            <PlusIcon /> Add New Product
+          </Button>
         </PageHeader>
       </div>
 
@@ -134,10 +141,17 @@ export default function Products() {
           (id) => setProductData((prev) => prev.filter((t) => t.id !== id)),
           slugSort,
           toggleSlugSort,
+          (id) => openSheet(id),
         )}
         pagination={pagination}
         isLoading={loading && productData.length === 0}
         toolbar={<ProductFilters />}
+      />
+
+      <ProductSheet
+        productId={sheetProductId}
+        open={sheetOpen}
+        onOpenChange={setSheetOpen}
       />
     </div>
   );

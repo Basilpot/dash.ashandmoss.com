@@ -4,19 +4,13 @@ import StepButton from "@/components/atoms/step-button";
 import { Button } from "@repo/ui";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useProductStore } from "@/store/useProductStore";
+import { PRODUCT_STEPS } from "@/components/product/product-editor";
 import { useSearchParams } from "next/navigation";
 import React, { Suspense } from "react";
 
-const STEPS = [
-  "Basic Information",
-  "Gallery",
-  "Pricing",
-  "Variants",
-  "Attributes",
-  "Categorization",
-  "FAQ",
-  "SEO",
-];
+// The labels live with the form, in one table, so the rail and the editor's
+// groups cannot drift apart.
+const STEPS = PRODUCT_STEPS.map((step) => step.title);
 
 function LayoutContent({ children }: Readonly<{ children: React.ReactNode }>) {
   const searchParams = useSearchParams();
