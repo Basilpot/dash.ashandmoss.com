@@ -12,6 +12,7 @@ import { SETTINGS_TABS } from "@repo/ui"
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuItem,
@@ -181,16 +182,6 @@ export function AppSidebar({
                     {s.id === currentStore?.id ? <Check className="size-4 shrink-0" /> : null}
                   </DropdownMenuItem>
                 ))}
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel className="flex items-center gap-2">
-                  <LucideSettings className="size-3.5" aria-hidden />
-                  Settings
-                </DropdownMenuLabel>
-                {SETTINGS_TABS.map((tab) => (
-                  <DropdownMenuItem key={tab.href} asChild>
-                    <Link href={tab.href}>{tab.title}</Link>
-                  </DropdownMenuItem>
-                ))}
               </DropdownMenuContent>
             </DropdownMenu>
           </SidebarMenuItem>
@@ -200,6 +191,30 @@ export function AppSidebar({
         <NavMain items={navMain} />
         <NavSecondary items={SECONDARY_NAV} className="mt-auto" />
       </SidebarContent>
+      {/* Settings at the foot of the sidebar, out of the navigation flow: the
+          seven tabs are an account's configuration, not somewhere to browse to,
+          so they live behind one trigger instead of eight rows. */}
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <LucideSettings />
+                  Settings
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent side="right" align="end" className="w-52">
+                {SETTINGS_TABS.map((tab) => (
+                  <DropdownMenuItem key={tab.href} asChild>
+                    <Link href={tab.href}>{tab.title}</Link>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   )
 }
