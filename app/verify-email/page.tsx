@@ -1,6 +1,6 @@
 import { VerifyEmail } from "./verify-email";
 
-export const metadata = { title: "Basilpot" };
+export const metadata = { title: "Ash & Moss" };
 
 export default async function VerifyPage({ searchParams }: { searchParams: Promise<{ token?: string }> }) {
   const { token = "" } = await searchParams;

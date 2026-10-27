@@ -1,6 +1,6 @@
 {
   // Furniture (ecom) admin dashboard — Next.js via OpenNext on Workers
-  "name": "store-basilpot-com",
+  "name": "dash-ashandmoss-com",
   "main": ".open-next/worker.js",
   "compatibility_date": "2026-08-14",
   "compatibility_flags": ["nodejs_compat"],
@@ -8,6 +8,10 @@
     "directory": ".open-next/assets",
     "binding": "ASSETS"
   },
-  "routes": [{ "pattern": "store.basilpot.com", "custom_domain": true }],
+  "routes": [
+    { "pattern": "dash.ashandmoss.com", "custom_domain": true },
+    // more specific than the storefront's *.ashandmoss.com/* route, which would otherwise win
+    { "pattern": "dash.ashandmoss.com/*", "zone_name": "ashandmoss.com" }
+  ],
   "observability": { "enabled": true }
 }

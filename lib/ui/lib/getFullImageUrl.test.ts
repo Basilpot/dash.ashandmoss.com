@@ -9,11 +9,11 @@ import { getFullImageUrl } from "./getFullImageUrl.ts";
 // next/image rejected it as an unconfigured hostname.
 test("re-points absolute upload URLs at the same-origin proxy", () => {
   assert.equal(
-    getFullImageUrl("https://eapi.basilpot.com/api/v1/uploads/demo/furniture-1.webp"),
+    getFullImageUrl("https://api.ashandmoss.com/api/v1/uploads/demo/furniture-1.webp"),
     "/api/uploads/demo/furniture-1.webp",
   );
   assert.equal(
-    getFullImageUrl("https://eapi.basilpot.com/uploads/a.webp"),
+    getFullImageUrl("https://api.ashandmoss.com/uploads/a.webp"),
     "/api/uploads/a.webp",
   );
   assert.equal(

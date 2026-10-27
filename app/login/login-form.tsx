@@ -1,6 +1,6 @@
 "use client";
 
-import { UserCog } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@repo/ui";
 import { Button } from "@repo/ui";
 import {
@@ -27,6 +27,7 @@ export function LoginForm({
   const { register, handleSubmit } = useForm<FormValues>();
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function onSubmit(data: FormValues) {
     try {
@@ -79,59 +80,78 @@ export function LoginForm({
   }
 
   return (
-    <div
-      className={cn("flex w-full max-w-sm flex-col", className)}
-      {...props}
-    >
-      {/* No card. The reference sets the form straight on the page: a bordered
-          panel around two inputs and a button is a container drawn around the
-          only thing on screen, which it then has to compete with. */}
-      <div className="flex flex-col items-center text-center">
-        <Link href="/" aria-label="Ash and Moss home" className="flex flex-col items-center">
-          <span className="flex size-10 items-center justify-center rounded-full bg-primary text-primary-foreground">
-            <UserCog className="size-5" />
-          </span>
-          <span className="sr-only">Ash &amp; Moss</span>
-        </Link>
-        <h1 className="mt-5 text-2xl tracking-tight">Sign in to Ash &amp; Moss</h1>
+    <div className={cn("flex w-full max-w-xs flex-col gap-6", className)} {...props}>
+      <div className="flex flex-col gap-2 text-center">
+        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
+        <p className="text-sm text-balance text-muted-foreground">
+          Sign in to manage your store.
+        </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="email">Email</FieldLabel>
-                <Input
-                  id="email"
-                  type="email"
-                  placeholder="m@example.com"
-                  required
-                  {...register("email")}
-                />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="password">Password</FieldLabel>
-                <Input
-                  id="password"
-                  type="password"
-                  required
-                  {...register("password")}
-                />
-              </Field>
-              <Field>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? "Signing in..." : "Login"}
-                </Button>
-              </Field>
-            </FieldGroup>
-          </form>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="email">Email</FieldLabel>
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              required
+              {...register("email")}
+            />
+          </Field>
+          <Field>
+            <div className="flex items-center">
+              <FieldLabel htmlFor="password">Password</FieldLabel>
+              <Link href="/forgot-password" className="ml-auto text-sm text-muted-foreground underline-offset-4 hover:text-foreground hover:underline">
+                Forgot password?
+              </Link>
+            </div>
+            <div className="relative">
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                autoComplete="current-password"
+                className="pr-10"
+                required
+                {...register("password")}
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
+                className="absolute inset-y-0 right-0 flex w-10 items-center justify-center text-muted-foreground hover:text-foreground"
+              >
+                {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+              </button>
+            </div>
+          </Field>
+          <Field>
+            <Button type="submit" className="w-full" disabled={isLoading}>
+              {isLoading ? "Signing in..." : "Sign in"}
+            </Button>
+          </Field>
+        </FieldGroup>
+      </form>
 
-      <div className="mt-6 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-        <Link href="/signup" className="hover:text-foreground">
-          Create your store
-        </Link>
-        <Link href="/verify-email" className="hover:text-foreground">
-          Verify email
-        </Link>
+      <div className="flex items-center gap-3 text-xs text-muted-foreground">
+        <span className="h-px flex-1 bg-border" />
+        New here?
+        <span className="h-px flex-1 bg-border" />
+      </div>
+
+      <div className="flex flex-col gap-2 text-center text-sm text-muted-foreground">
+        <p>
+          <Link href="/signup" className="font-medium text-foreground underline underline-offset-4">
+            Create your store
+          </Link>
+        </p>
+        <p>
+          <Link href="/verify-email" className="underline underline-offset-4 hover:text-foreground">
+            Verify your email
+          </Link>
+        </p>
       </div>
     </div>
   );

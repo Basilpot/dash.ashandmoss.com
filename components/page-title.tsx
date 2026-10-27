@@ -19,7 +19,7 @@ export function PageTitle() {
     LABELS[segment] ??
     (segment
       ? segment.replaceAll("-", " ").replace(/^./, (c) => c.toUpperCase())
-      : "Basilpot");
+      : "Ash & Moss");
 
   return <title>{title}</title>;
 }
